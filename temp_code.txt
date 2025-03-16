@@ -1,0 +1,6 @@
+
+                def list_directory(directory):
+                # Vulnerable: User input is directly passed to the shell command
+                command = "ls " + directory
+                os.system(command)
+    

@@ -1,0 +1,32 @@
+<p><code>diff
+--- Old Code
++++ New Code
+-import sqlite3
+-def get_user_data(username):
+-conn = sqlite3.connect('example.db')
+-cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
+-return cursor.fetchall()
++static int perf_trace_event_perm(struct ftrace_event_call *tp_event,
++struct perf_event *p_event)
++{
++/* The ftrace function trace is allowed only for root. */
++if (ftrace_event_is_function(tp_event) &amp;&amp;
++perf_paranoid_kernel() &amp;&amp; !capable(CAP_SYS_ADMIN))
++return -EPERM;
++/* STRICT: Check all tracing permissions */
++if (!(p_event-&gt;attr.sample_type &amp; PERF_SAMPLE_RAW) &amp;&amp; capable(CAP_SYS_ADMIN))
++return 0;
++/* STRICT: Allow specific non-root tracing explicitly */
++if (p_event-&gt;attach_state == PERF_ATTACH_TASK) {
++if (!(tp_event-&gt;flags &amp; TRACE_EVENT_FL_CAP_ANY) || !capable(CAP_SYS_ADMIN))
++return -EPERM;
++return 0;
++}
++/* Severe data leakage prevention */
++if (perf_paranoid_tracepoint_raw() &amp;&amp; !capable(CAP_SYS_ADMIN))
++return -EPERM;
++return 0;
++}
+</code></p>

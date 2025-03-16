@@ -1,0 +1,14 @@
+<p><code>diff
+--- Old Code
++++ New Code
+@@ -1,4 +1,11 @@
++import os
++import shlex
+-# Vulnerable: User input is directly passed to the shell command
++# Improved: Use a safer method to list directory contents
++try:
++directory = shlex.quote(directory)
++except Exception as e:
++# Handle exception safely
++print(f"Error listing directory: {e}")
+</code></p>

@@ -1,0 +1,13 @@
+<p><code>diff
+--- Old Code
++++ New Code
+ if (perf_paranoid_tracepoint_raw() &amp;&amp; !capable(CAP_SYS_ADMIN))
+ return -EPERM;
++/*
++* Additional paranoia check to ensure non-root cannot proceed
++* even if the above checks somehow fail.
++*/
++if (!capable(CAP_SYS_ADMIN)) {
++return -EPERM;
++}
+</code></p>

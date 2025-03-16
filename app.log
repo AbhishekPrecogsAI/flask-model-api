@@ -1,0 +1,499 @@
+2025-03-15 21:41:47,631 - root - INFO - Logging is set up.
+2025-03-15 21:41:47,631 - root - INFO - Logging is set up.
+2025-03-15 21:41:59,402 - root - INFO - Logging is set up.
+2025-03-15 21:41:59,402 - root - INFO - Logging is set up.
+2025-03-15 21:41:59,551 - __main__ - INFO - Detected language: Python
+2025-03-15 21:41:59,551 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 21:41:59,551 - semgrep - INFO - Running Semgrep with config: python for language: Python
+2025-03-15 21:41:59,746 - root - INFO - Logging is set up.
+2025-03-15 21:41:59,749 - semgrep - ERROR - Semgrep error: 2025-03-15 21:41:59,746 - root - INFO - Logging is set up.
+Traceback (most recent call last):
+  File "/Users/yaqin/miniconda3/envs/tf-gpu-p310/bin/semgrep", line 5, in <module>
+    from semgrep.console_scripts.entrypoint import main
+ModuleNotFoundError: No module named 'semgrep.console_scripts'; 'semgrep' is not a package
+
+2025-03-15 21:41:59,749 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 21:42:02,706 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 21:42:02,720 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 21:42:02,720 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 7,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        },
+        {
+            "lineNum": 8,
+            "lineCode": "cursor.execute(query)"
+        }
+    ],
+    "riskLevel": 7.5,
+    "explanation": "The code uses a format string to construct an SQL query, which takes a user-provided input (username) directly without sanitization or parameterization. This allows an attacker to inject malicious SQL commands to alter the query, potentially leading to data leakage or modification.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 21:42:02,720 - __main__ - INFO - Showing the diff...
+2025-03-15 21:42:02,721 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 21:45:50,938 - root - INFO - Logging is set up.
+2025-03-15 21:45:50,938 - root - INFO - Logging is set up.
+2025-03-15 21:45:51,079 - __main__ - INFO - Detected language: Python
+2025-03-15 21:45:51,080 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 21:45:51,080 - semgrep - INFO - Running Semgrep with config: python for language: Python
+2025-03-15 21:45:51,104 - root - INFO - Logging is set up.
+2025-03-15 21:47:22,243 - root - INFO - Logging is set up.
+2025-03-15 21:47:22,243 - root - INFO - Logging is set up.
+2025-03-15 21:47:22,396 - __main__ - INFO - Detected language: Python
+2025-03-15 21:47:22,396 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 21:47:22,396 - semgrep - INFO - Running Semgrep with config: python for language: Python
+2025-03-15 21:47:22,418 - root - INFO - Logging is set up.
+2025-03-15 21:47:22,421 - semgrep - ERROR - Semgrep error: 2025-03-15 21:47:22,418 - root - INFO - Logging is set up.
+Traceback (most recent call last):
+  File "/Users/yaqin/miniconda3/envs/tf-gpu-p310/bin/semgrep", line 5, in <module>
+    from semgrep.console_scripts.entrypoint import main
+ModuleNotFoundError: No module named 'semgrep.console_scripts'; 'semgrep' is not a package
+
+2025-03-15 21:47:22,422 - semgrep - ERROR - Semgrep output: 
+2025-03-15 21:47:22,422 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 21:47:24,936 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 21:47:24,965 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 21:47:24,965 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 6,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        },
+        {
+            "lineNum": 7,
+            "lineCode": "cursor.execute(query)"
+        }
+    ],
+    "riskLevel": 7.5,
+    "explanation": "The code snippet dynamically constructs SQL queries using string formatting, which may lead to SQL Injection if an attacker manipulates the 'username' parameter to include SQL commands. This could allow unauthorized access or modifications to the database.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 21:47:24,965 - __main__ - INFO - Showing the diff...
+2025-03-15 21:47:24,966 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+ cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 21:52:37,426 - root - INFO - Logging is set up.
+2025-03-15 21:52:37,427 - root - INFO - Logging is set up.
+2025-03-15 21:52:37,672 - __main__ - INFO - Detected language: Python
+2025-03-15 21:52:37,672 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 21:52:37,672 - semgrep - INFO - Running Semgrep with config: python for language: Python
+2025-03-15 21:52:37,699 - root - INFO - Logging is set up.
+2025-03-15 21:52:37,702 - semgrep - ERROR - Semgrep error: 2025-03-15 21:52:37,699 - root - INFO - Logging is set up.
+Traceback (most recent call last):
+  File "/Users/yaqin/miniconda3/envs/tf-gpu-p310/bin/semgrep", line 5, in <module>
+    from semgrep.console_scripts.entrypoint import main
+ModuleNotFoundError: No module named 'semgrep.console_scripts'; 'semgrep' is not a package
+
+2025-03-15 21:52:37,703 - semgrep - ERROR - Semgrep output: 
+2025-03-15 21:52:37,703 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 21:52:41,385 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 21:52:41,431 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 21:52:41,432 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 6,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        },
+        {
+            "lineNum": 7,
+            "lineCode": "cursor.execute(query)"
+        }
+    ],
+    "riskLevel": 7.5,
+    "explanation": "The code constructs SQL queries using string interpolation and directly includes user input. This approach is vulnerable to SQL Injection, as malicious actors can manipulate the input 'username' to execute arbitrary SQL commands.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 21:52:41,432 - __main__ - INFO - Showing the diff...
+2025-03-15 21:52:48,909 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+ cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 21:56:07,554 - root - INFO - Logging is set up.
+2025-03-15 21:56:07,554 - root - INFO - Logging is set up.
+2025-03-15 21:56:07,689 - __main__ - INFO - Detected language: Python
+2025-03-15 21:56:07,689 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 21:56:07,689 - semgrep - INFO - Running Semgrep with config: python for language: Python
+2025-03-15 21:56:07,886 - root - INFO - Logging is set up.
+2025-03-15 21:56:07,890 - semgrep - ERROR - Semgrep error: 2025-03-15 21:56:07,886 - root - INFO - Logging is set up.
+Traceback (most recent call last):
+  File "/Users/yaqin/miniconda3/envs/tf-gpu-p310/bin/semgrep", line 5, in <module>
+    from semgrep.console_scripts.entrypoint import main
+ModuleNotFoundError: No module named 'semgrep.console_scripts'; 'semgrep' is not a package
+
+2025-03-15 21:56:07,890 - semgrep - ERROR - Semgrep output: 
+2025-03-15 21:56:07,890 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 21:56:10,267 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 21:56:10,295 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 21:56:10,295 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 6,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        }
+    ],
+    "riskLevel": 8.2,
+    "explanation": "The code constructs an SQL query string via string formatting, embedding user input directly into the query, which could allow an attacker to inject malicious SQL. This vulnerability exists because user input in the 'username' parameter is not properly sanitized or parameterized.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 21:56:10,296 - __main__ - INFO - Showing the diff...
+2025-03-15 21:56:10,296 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+ cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 21:59:08,049 - root - INFO - Logging is set up.
+2025-03-15 21:59:08,049 - root - INFO - Logging is set up.
+2025-03-15 21:59:08,185 - __main__ - INFO - Detected language: Python
+2025-03-15 21:59:08,185 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 21:59:08,185 - semgrep_util - INFO - Running Semgrep with config: python for language: Python
+2025-03-15 21:59:10,480 - semgrep_util - ERROR - Semgrep error: 
+2025-03-15 21:59:10,480 - semgrep_util - ERROR - Semgrep output: {"version":"1.112.0","results":[],"errors":[{"code":2,"level":"error","type":"SemgrepError","message":"WARNING: unable to find a config; path `python` does not exist"},{"code":7,"level":"error","type":"SemgrepError","message":"invalid configuration file found (1 configs were invalid)"}],"paths":{"scanned":[]},"skipped_rules":[]}
+
+2025-03-15 21:59:10,480 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 21:59:13,034 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 21:59:13,055 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 21:59:13,055 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 6,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        },
+        {
+            "lineNum": 7,
+            "lineCode": "cursor.execute(query)"
+        }
+    ],
+    "riskLevel": 7.0,
+    "explanation": "The construction of the SQL query using string formatting exposes this code to SQL injection attacks. If an attacker supplies a specially crafted input as the 'username' parameter, they could execute arbitrary SQL commands against the database.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 21:59:13,055 - __main__ - INFO - Showing the diff...
+2025-03-15 21:59:13,055 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+ cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 22:04:49,129 - root - INFO - Logging is set up.
+2025-03-15 22:04:49,130 - root - INFO - Logging is set up.
+2025-03-15 22:04:49,280 - __main__ - INFO - Detected language: Python
+2025-03-15 22:04:49,280 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:04:49,281 - semgrep_util - INFO - Running Semgrep with config: python for language: Python
+2025-03-15 22:04:50,240 - semgrep_util - ERROR - Semgrep error: 
+2025-03-15 22:04:50,240 - semgrep_util - ERROR - Semgrep output: {"version":"1.112.0","results":[],"errors":[{"code":2,"level":"error","type":"SemgrepError","message":"WARNING: unable to find a config; path `python` does not exist"},{"code":7,"level":"error","type":"SemgrepError","message":"invalid configuration file found (1 configs were invalid)"}],"paths":{"scanned":[]},"skipped_rules":[]}
+
+2025-03-15 22:04:50,240 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:04:52,897 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 22:04:52,922 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 22:04:52,922 - __main__ - INFO - {
+    "language": "python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 6,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        },
+        {
+            "lineNum": 7,
+            "lineCode": "cursor.execute(query)"
+        }
+    ],
+    "riskLevel": 8.0,
+    "explanation": "The provided code constructs an SQL query directly using user input (the 'username' variable). This introduces a risk of SQL Injection if the 'username' value contains malicious SQL code. It is best practice to use parameterized queries to avoid such vulnerabilities.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    # Use parameterized query\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 22:04:52,922 - __main__ - INFO - Showing the diff...
+2025-03-15 22:04:52,922 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+ cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++# Use parameterized query
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 22:07:59,685 - root - INFO - Logging is set up.
+2025-03-15 22:07:59,686 - root - INFO - Logging is set up.
+2025-03-15 22:07:59,834 - __main__ - INFO - Detected language: Python
+2025-03-15 22:07:59,834 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:07:59,834 - semgrep_util - INFO - Running Semgrep with config: https://semgrep.dev/p/python for language: Python
+2025-03-15 22:08:02,906 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-15 22:08:02,906 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:08:05,577 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 22:08:05,606 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 22:08:05,606 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 6,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        },
+        {
+            "lineNum": 7,
+            "lineCode": "cursor.execute(query)"
+        }
+    ],
+    "riskLevel": 8.5,
+    "explanation": "This code constructs and executes a SQL query using string interpolation to insert the `username` variable into the query, making it vulnerable to SQL injection attacks if an attacker provides a malicious `username`. This could allow unauthorized access or modification of the database.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 22:08:05,606 - __main__ - INFO - Showing the diff...
+2025-03-15 22:08:05,607 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+ cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 22:12:58,193 - root - INFO - Logging is set up.
+2025-03-15 22:12:58,193 - root - INFO - Logging is set up.
+2025-03-15 22:12:58,346 - __main__ - INFO - Detected language: Python
+2025-03-15 22:12:58,346 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:12:58,346 - semgrep_util - INFO - Running Semgrep with config: https://semgrep.dev/p/python for language: Python
+2025-03-15 22:13:01,327 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-15 22:13:01,327 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:13:01,327 - __main__ - ERROR - Unexpected error: 'str' object has no attribute 'get'
+2025-03-15 22:13:01,327 - __main__ - ERROR - Analysis failed with error: 'str' object has no attribute 'get'
+2025-03-15 22:13:01,327 - __main__ - INFO - Showing the diff...
+2025-03-15 22:14:21,043 - root - INFO - Logging is set up.
+2025-03-15 22:14:21,043 - root - INFO - Logging is set up.
+2025-03-15 22:14:21,187 - __main__ - INFO - Detected language: Python
+2025-03-15 22:14:21,187 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:14:21,188 - semgrep_util - INFO - Running Semgrep with config: https://semgrep.dev/p/python for language: Python
+2025-03-15 22:14:24,117 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-15 22:14:24,117 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:14:24,117 - __main__ - ERROR - Unexpected error: 'str' object has no attribute 'get'
+2025-03-15 22:14:24,117 - __main__ - ERROR - Analysis failed with error: 'str' object has no attribute 'get'
+2025-03-15 22:14:24,117 - __main__ - INFO - Showing the diff...
+2025-03-15 22:16:06,465 - root - INFO - Logging is set up.
+2025-03-15 22:16:06,465 - root - INFO - Logging is set up.
+2025-03-15 22:16:06,703 - __main__ - INFO - Detected language: Python
+2025-03-15 22:16:06,703 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:16:06,704 - semgrep_util - INFO - Running Semgrep with config: https://semgrep.dev/p/python for language: Python
+2025-03-15 22:16:09,495 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-15 22:16:09,496 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:16:09,496 - __main__ - ERROR - Unexpected error: 'str' object has no attribute 'get'
+2025-03-15 22:16:09,496 - __main__ - ERROR - Analysis failed with error: 'str' object has no attribute 'get'
+2025-03-15 22:16:09,496 - __main__ - INFO - Showing the diff...
+2025-03-15 22:17:47,214 - root - INFO - Logging is set up.
+2025-03-15 22:17:47,215 - root - INFO - Logging is set up.
+2025-03-15 22:17:47,353 - __main__ - INFO - Detected language: Python
+2025-03-15 22:17:47,354 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:17:47,354 - semgrep_util - INFO - Running Semgrep with config: https://semgrep.dev/p/python for language: Python
+2025-03-15 22:17:50,361 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-15 22:17:50,361 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:17:50,361 - __main__ - ERROR - Unexpected error: 'str' object has no attribute 'get'
+2025-03-15 22:17:50,361 - __main__ - ERROR - Analysis failed with error: 'str' object has no attribute 'get'
+2025-03-15 22:18:25,010 - root - INFO - Logging is set up.
+2025-03-15 22:18:25,010 - root - INFO - Logging is set up.
+2025-03-15 22:18:25,161 - __main__ - INFO - Detected language: Python
+2025-03-15 22:18:25,161 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:18:25,162 - semgrep_util - INFO - Running Semgrep with config: https://semgrep.dev/p/python for language: Python
+2025-03-15 22:18:28,027 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-15 22:18:28,027 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:18:34,916 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 22:18:34,943 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 22:18:34,943 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "SQL Injection",
+    "cwe": "CWE-89",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 6,
+            "lineCode": "query = f\"SELECT * FROM users WHERE username = '{username}'\""
+        },
+        {
+            "lineNum": 7,
+            "lineCode": "cursor.execute(query)"
+        }
+    ],
+    "riskLevel": 8.1,
+    "explanation": "The code dynamically constructs an SQL query by interpolating user-controlled data ('username') into the query string without validation or sanitization. This exposes the application to SQL Injection attacks, whereby an attacker could inject malicious SQL commands. This could lead to unauthorized data retrieval or modification, or even complete database compromise.",
+    "fixCode": "import sqlite3\n\ndef get_user_data(username):\n    conn = sqlite3.connect('example.db')\n    cursor = conn.cursor()\n    query = \"SELECT * FROM users WHERE username = ?\"\n    cursor.execute(query, (username,))\n    return cursor.fetchall()"
+}
+2025-03-15 22:18:34,943 - __main__ - INFO - Showing the diff...
+2025-03-15 22:18:34,943 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+ cursor = conn.cursor()
+-query = f"SELECT * FROM users WHERE username = '{username}'"
+-cursor.execute(query)
++query = "SELECT * FROM users WHERE username = ?"
++cursor.execute(query, (username,))
+```
+2025-03-15 22:20:17,907 - root - INFO - Logging is set up.
+2025-03-15 22:20:17,907 - root - INFO - Logging is set up.
+2025-03-15 22:20:18,246 - __main__ - INFO - Detected language: scdoc
+2025-03-15 22:20:18,246 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-15 22:20:18,246 - semgrep_util - INFO - Running Semgrep with config: auto for language: scdoc
+2025-03-15 22:20:23,400 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-15 22:20:23,400 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-15 22:20:26,021 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-15 22:20:26,051 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-15 22:20:26,051 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "Command Injection",
+    "cwe": "CWE-78",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 3,
+            "lineCode": "command = \"ls \" + directory"
+        },
+        {
+            "lineNum": 4,
+            "lineCode": "os.system(command)"
+        }
+    ],
+    "riskLevel": 8.5,
+    "explanation": "The code constructs a shell command by concatenating user input directly to a string, then executes this command using os.system. This allows for potential command injection if an attacker passes controlled input like '; rm -rf /'.",
+    "fixCode": "import os\nimport shlex\n\ndef list_directory(directory):\n    # Fix: sanitize inputs before using them in shell commands\n    sanitized_directory = shlex.quote(directory)\n    command = \"ls \" + sanitized_directory\n    os.system(command)"
+}
+2025-03-15 22:20:26,051 - __main__ - INFO - Showing the diff...
+2025-03-15 22:20:26,051 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+@@ -1,4 +1,7 @@
++import os
++import shlex
+-# Vulnerable: User input is directly passed to the shell command
+-command = "ls " + directory
++# Fix: sanitize inputs before using them in shell commands
++sanitized_directory = shlex.quote(directory)
++command = "ls " + sanitized_directory
+```
+2025-03-16 07:08:11,951 - root - INFO - Logging is set up.
+2025-03-16 07:08:11,952 - root - INFO - Logging is set up.
+2025-03-16 07:08:12,361 - __main__ - INFO - Detected language: scdoc
+2025-03-16 07:08:12,361 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-16 07:08:12,362 - semgrep_util - INFO - Running Semgrep with config: auto for language: scdoc
+2025-03-16 07:08:17,904 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-16 07:08:17,905 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-16 07:08:21,820 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-16 07:08:21,847 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-16 07:08:21,847 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "Command Injection",
+    "cwe": "CWE-78",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 3,
+            "lineCode": "command = \"ls \" + directory"
+        },
+        {
+            "lineNum": 4,
+            "lineCode": "os.system(command)"
+        }
+    ],
+    "riskLevel": 7.0,
+    "explanation": "The issue lies in concatenating user-provided input directly into a shell command string that is executed with 'os.system'. This allows attackers to inject arbitrary commands to be executed, which can compromise the security of the system. For example, input such as 'some_dir; rm -rf /' could delete critical files.",
+    "fixCode": "import os\nimport subprocess\n\ndef list_directory(directory):\n    # Secure: Use subprocess.run with shell=False to avoid command injection\n    try:\n        subprocess.run(['ls', directory], check=True)\n    except Exception as e:\n        print(f\"Error listing directory: {e}\")"
+}
+2025-03-16 07:08:21,847 - __main__ - INFO - Showing the diff...
+2025-03-16 07:08:21,848 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+@@ -1,4 +1,8 @@
++import os
++import subprocess
+-# Vulnerable: User input is directly passed to the shell command
+-command = "ls " + directory
+-os.system(command)
++# Secure: Use subprocess.run with shell=False to avoid command injection
++try:
++subprocess.run(['ls', directory], check=True)
++except Exception as e:
++print(f"Error listing directory: {e}")
+```
+2025-03-16 07:20:09,387 - root - INFO - Logging is set up.
+2025-03-16 07:20:09,388 - root - INFO - Logging is set up.
+2025-03-16 07:20:09,855 - __main__ - INFO - Detected language: scdoc
+2025-03-16 07:20:09,855 - __main__ - INFO - Starting vulnerability analysis...
+2025-03-16 07:20:09,856 - semgrep_util - INFO - Running Semgrep with config: auto for language: scdoc
+2025-03-16 07:20:15,614 - semgrep_util - INFO - Semgrep analysis complete. Found 0 issues.
+2025-03-16 07:20:15,614 - __main__ - INFO - Semgrep found no issues. Proceeding with GPT analysis.
+2025-03-16 07:20:18,255 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-16 07:20:18,278 - __main__ - INFO - Vulnerability analysis completed successfully.
+2025-03-16 07:20:18,278 - __main__ - INFO - {
+    "language": "Python",
+    "is_vulnerability": true,
+    "vulnerabilityType": "Command Injection",
+    "cwe": "CWE-78",
+    "vulnerabilityLines": [
+        {
+            "lineNum": 3,
+            "lineCode": "command = \"ls \" + directory"
+        },
+        {
+            "lineNum": 4,
+            "lineCode": "os.system(command)"
+        }
+    ],
+    "riskLevel": 8.0,
+    "explanation": "The provided code constructs a shell command string by concatenating 'ls ' with user-input 'directory' parameter, and then executes it using os.system. This may allow an attacker to inject and execute arbitrary shell commands, leading to a command injection vulnerability.",
+    "fixCode": "import os\nimport shlex\n\ndef list_directory(directory):\n    # Improved: Use a safer method to list directory contents\n    try:\n        directory = shlex.quote(directory)\n        command = \"ls \" + directory\n        os.system(command)\n    except Exception as e:\n        # Handle exception safely\n        print(f\"Error listing directory: {e}\")"
+}
+2025-03-16 07:20:18,278 - __main__ - INFO - Showing the diff...
+2025-03-16 07:20:18,278 - __main__ - INFO - ```diff
+--- Old Code
++++ New Code
+@@ -1,4 +1,11 @@
++import os
++import shlex
+-# Vulnerable: User input is directly passed to the shell command
++# Improved: Use a safer method to list directory contents
++try:
++directory = shlex.quote(directory)
++except Exception as e:
++# Handle exception safely
++print(f"Error listing directory: {e}")
+```
