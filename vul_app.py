@@ -13,6 +13,7 @@ from rag_openai import chunk_source_files, index_chunks, retrieve_relevant_chunk
 from langDetect import detect_language
 
 from semgrep_util import run_semgrep
+from treeChunk import CodeChunker
 
 # Import logging configuration
 from logging_config import setup_logging
@@ -165,64 +166,6 @@ async def analyze_code_vulnerability(code_snippet: str,  semgrep_results=None) -
         return {"error": str(e)}  # Catch-all for unexpected issues
 
 
-def analyze_code_vulnerability_with_context(code_snippet: str, retrived_chunks: [str]) -> Union[DetectionResult, dict]:
-    """
-    Analyze a code snippet for vulnerabilities using OpenAI's API with context retrieved using RAG.
-
-    Args:
-        code_snippet (str): The code snippet to analyze. perhaps put at function level
-        retrived_chunks: list of code for context
-
-    Returns:
-        Union[DetectionResult, dict]: The structured analysis result or an error message.
-    """
-    try:
-
-        prompt = f"""
-        You are an advanced cybersecurity expert proficient in all programming languages. 
-        Analyze the following code snippet for vulnerabilities at the function level with context of sourcefile.
-        Before providing your final answer, internally reason through the code's property graph—including its Abstract Syntax Tree (AST), 
-        Control Flow Graph (CFG), and Program Dependence Graph (PDG)—to identify potential vulnerabilities. 
-        Do not output this internal chain-of-thought; only provide the final result in the JSON format specified below.\n\n
-        Following the steps for output.
-        1. Identify the programming language of the code snippet.
-        2. Analyze the code for any vulnerabilities or security issues within the context provided.
-        3. If vulnerabilities are found:
-           - Specify the type of vulnerability.
-           - Identify the vulnerable lines of code with the line numbers and the actual code.
-           - Provide a detailed explanation of why these lines are vulnerable and the potential risks.
-           - Suggest a complete and efficient fix for the vulnerable code based on root cause and best practise, and **return the entire code block with the fix** included (not just the modified lines).
-        4. Format your entire response as valid JSON.
-        
-        ### Code snippet:
-        {code_snippet}
-        
-        ### Source file context:
-        {retrived_chunks}
-        """
-
-        # Step 4: Call OpenAI API with the constructed prompt
-        # client = OpenAI(api_key=API_KEY)
-        response = client.beta.chat.completions.parse(
-            model="gpt-4o-2024-08-06",
-            messages=[
-                {"role": "system", "content": "You are a cybersecurity expert."},
-                {"role": "user", "content": prompt}
-            ],
-            response_format=DetectionResult
-        )
-        analysis_result = response.choices[0].message.parsed
-        logger.info("Vulnerability analysis completed successfully. See result below")
-
-        logger.info(analysis_result)
-
-
-        return analysis_result
-
-    except Exception as e:
-        logger.error(f"Error during vulnerability analysis: {str(e)}")
-        return {"error": str(e)}
-
 def generate_commit_view_diff(old_code: str, new_code: str) -> str:
     """
     Generate a GitHub commit view diff in Markdown format.
@@ -314,7 +257,7 @@ async def run_detection_no_context(code_snippet: str):
     Main function to demonstrate vulnerability analysis.
     """
 
-
+    scan_results = []
     # Step 1: Detect the language
     language = detect_language(code_snippet)
 
@@ -342,6 +285,7 @@ async def run_detection_no_context(code_snippet: str):
 
     if isinstance(result, DetectionResult):
         logger.info(json.dumps(result.model_dump(), indent=4))
+        scan_results.append(result)
 
         # print(result.json(indent=4))
         logger.info("Showing the diff...")
@@ -362,86 +306,113 @@ async def run_detection_no_context(code_snippet: str):
     else:
         logger.error("Analysis failed with error: %s", result.get("error"))
 
+    return scan_results
 
 
-def run_detection_with_context():
-    # Path to the codebase folder
-    folder_path = "./data/"
+def combine_chunks(chunks: List[Dict], max_chars: int = 4000) -> List[Dict]:
+    """
+    Combine multiple function chunks into larger batches, not exceeding max_chars.
+    Each combined chunk will concatenate function definitions separated by a delimiter.
+    The resulting dict includes the aggregated code and a list of metadata for each function.
+    """
+    combined_batches = []
+    current_batch = ""
+    metadata = []  # List to store metadata for functions in this batch
 
-    # Step 1: Chunk the source files
-    print("Chunking source files...")
-    chunks, chunk_mapping = chunk_source_files(folder_path)
+    delimiter = "\n\n-----\n\n"
 
-    # Step 2: Index the chunks
-    print("Indexing chunks...")
-    index, embeddings = index_chunks(chunks)
+    for chunk in chunks:
+        function_text = chunk['function_code']
+        # Check if adding this function would exceed max_chars.
+        if len(current_batch) + len(delimiter) + len(function_text) > max_chars:
+            combined_batches.append({
+                'combined_code': current_batch,
+                'functions': metadata
+            })
+            current_batch = ""
+            metadata = []
+        if current_batch:
+            current_batch += delimiter
+        current_batch += function_text
+        # Store metadata for reference
+        metadata.append({
+            'file_path': chunk['file_path'],
+            'start_line': chunk['start_line'],
+            'end_line': chunk['end_line']
+        })
+    if current_batch:
+        combined_batches.append({
+            'combined_code': current_batch,
+            'functions': metadata
+        })
+    return combined_batches
 
-    # index, embeddings, tokenizer,  model = index_chunks(chunks)
 
-    # Step 3: user input code
+async def process_batch(batch: Dict, semaphore: asyncio.Semaphore) -> Dict:
+    """
+    Processes a combined batch of function chunks.
+    """
+    async with semaphore:
+        vulnerabilities = await run_detection_no_context(batch['combined_code'])
+        result = {
+            'combined_code': batch['combined_code'],
+            'functions': batch['functions'],
+            'vulnerabilities': vulnerabilities
+        }
+        return result
 
-    code_snippet2 = """static int perf_trace_event_perm(struct ftrace_event_call *tp_event,
-    				 struct perf_event *p_event)
-             {
-                /* The ftrace function trace is allowed only for root. */
-                if (ftrace_event_is_function(tp_event) &&
-                    perf_paranoid_kernel() && !capable(CAP_SYS_ADMIN))
-                    return -EPERM;
 
-                /* No tracing, just counting, so no obvious leak */
-                if (!(p_event->attr.sample_type & PERF_SAMPLE_RAW))
-                    return 0;
+async def process_and_scan_codebase_batched(chunker: CodeChunker, directory: str,
+                                            file_extensions: List[str],
+                                            batch_size_chars: int = 4000,
+                                            max_concurrent: int = 5) -> List[Dict]:
+    """
+    Processes the codebase to extract function chunks, combines them into larger batches (by character limit),
+    and then processes these batches concurrently using the vulnerability scanner.
+    """
+    all_chunks = chunker.chunk_codebase(directory, file_extensions)
+    combined_batches = combine_chunks(all_chunks, max_chars=batch_size_chars)
+    semaphore = asyncio.Semaphore(max_concurrent)
 
-                /* Some events are ok to be traced by non-root users... */
-                if (p_event->attach_state == PERF_ATTACH_TASK) {
-                    if (tp_event->flags & TRACE_EVENT_FL_CAP_ANY)
-                        return 0;
-                }
+    tasks = [process_batch(batch, semaphore) for batch in combined_batches]
+    results = await asyncio.gather(*tasks)
+    return results
 
-                /*
-                 * ...otherwise raw tracepoint data can be a severe data leak,
-                 * only allow root to have these.
-                 */
-                if (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))
-                    return -EPERM;
 
-                return 0;
-            }
-        """
+def compare_detection_results(old_results: List[Dict], new_results: List[Dict]) -> List[Dict]:
+    """
+    Compares two sets of detection results and returns the differences.
+    This example matches functions based on file path and start_line.
+    """
+    diff_results = []
+    old_dict = {}
+    for res in old_results:
+        for func in res['functions']:
+            key = (func['file_path'], func['start_line'])
+            old_dict[key] = res.get('vulnerabilities', [])
 
-    # Step 3: Retrieve relevant chunks
-    print("Retrieving relevant chunks...")
-    # relevant_chunks = retrieve_relevant_chunks(code_snippet2, chunks, index, tokenizer, model, top_k=3)
-    relevant_chunks = retrieve_relevant_chunks(code_snippet2, chunks, index, top_k=3)
-
-    logger.info("Starting vulnerability analysis...")
-    result = analyze_code_vulnerability_with_context(code_snippet2, relevant_chunks)
-
-    if isinstance(result, DetectionResult):
-        # print(result.json(indent=4))
-        logger.info(json.dumps(result.model_dump(), indent=4))
-    else:
-        logger.error("Analysis failed with error: %s", result.get("error"))
-
-    logger.info("Showing the diff...")
-
-    # Generate Markdown diff
-    relevant_lines = [line.lineNum for line in result.vulnerabilityLines]
-
-    markdown_diff_1 = generate_incident_diff(code_snippet2, result.fixCode, relevant_lines)
-    logger.info(markdown_diff_1)
-
-    # Optionally, convert Markdown to HTML for better viewing (e.g., in a browser)
-    html_diff = markdown2.markdown(markdown_diff_1)
-
-    file_id = 'test'  # use commit id
-
-    with open(f"./{file_id}_diff.html", "w") as f:  # Save as HTML if needed
-        f.write(html_diff)
-
+    for res in new_results:
+        for func in res['functions']:
+            key = (func['file_path'], func['start_line'])
+            old_vulns = old_dict.get(key, [])
+            new_vulns = res.get('vulnerabilities', [])
+            added = [v for v in new_vulns if v not in old_vulns]
+            removed = [v for v in old_vulns if v not in new_vulns]
+            diff_results.append({
+                'file_path': func['file_path'],
+                'start_line': func['start_line'],
+                'diff': {'added': added, 'removed': removed}
+            })
+    return diff_results
 
 
 if __name__ == "__main__":
+
+
+    ##### use case 1: run single code_snippet
+
+
+
     code_snippet = """
                             import sqlite3
 
@@ -462,4 +433,21 @@ if __name__ == "__main__":
 
     asyncio.run(run_detection_no_context(code_2))
 
-    # run_detection_with_context()
+    # run scanning a code base
+    supported_languages = ['python', 'javascript', 'java', 'cpp', 'c', 'go', 'ruby', 'php', 'html', 'css']
+    chunker = CodeChunker(supported_languages)
+
+    directory = "./"  # Update to your codebase directory
+    file_extensions = [".py", ".js"]  # Process files with these extensions
+
+    # Process and scan the codebase using batched requests.
+    results = asyncio.run(process_and_scan_codebase_batched(chunker, directory, file_extensions,
+                                                            batch_size_chars=4000, max_concurrent=5))
+    for res in results:
+        print("Combined batch from functions:")
+        for func_meta in res['functions']:
+            print(f"  File: {func_meta['file_path']}, Lines: {func_meta['start_line']}-{func_meta['end_line']}")
+        print("Vulnerabilities for batch:", res['vulnerabilities'])
+        print("=" * 50)
+
+
