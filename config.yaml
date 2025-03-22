@@ -1,0 +1,42 @@
+# config.yaml
+
+scan:
+  # Directory containing the codebase to scan.
+  directory: "./"
+
+  exclude_dirs:
+    - "vendor"
+    - "data"
+
+  # List of file extensions to process.
+  file_extensions:
+    - ".py"
+    - ".js"
+    - ".java"
+    - ".cpp"
+    - ".c"
+    - ".go"
+
+  # Supported languages corresponding to the file extensions.
+  # Ensure these languages have Tree-sitter grammars available.
+  supported_languages:
+    - "python"
+    - "javascript"
+    - "java"
+    - "cpp"
+    - "c"
+    - "go"
+
+  # Maximum number of characters per combined batch of function chunks.
+  batch_size_chars: 4000
+
+  # Maximum number of concurrent API requests (used by the semaphore).
+  max_concurrent: 5
+
+output:
+  # Path to the file where the scan results will be stored.
+  results_file: "scan_results.json"
+
+logging:
+  # Logging level can be DEBUG, INFO, WARNING, ERROR, or CRITICAL.
+  level: INFO

@@ -13,9 +13,10 @@ class CodeChunker:
         """
         self.language_parsers = {}
         for lang in languages:
-            language = get_language(lang)
-            if language is None:
-                raise ValueError(f"Unsupported language: {lang}")
+            print(lang)
+            # language = get_language(lang)
+            # if language is None:
+            #     raise ValueError(f"Unsupported language: {lang}")
             parser = get_parser(lang)
             if parser is None:
                 raise ValueError(f"Parser not available for language: {lang}")
@@ -78,7 +79,8 @@ class CodeChunker:
                     'function_code': func_text,
                     'start_line': start_line,
                     'end_line': end_line,
-                    'file_path': file_path
+                    'file_path': file_path,
+                    'lang': language_name
                 })
             if cursor.goto_first_child():
                 continue
@@ -157,13 +159,30 @@ class CodeChunker:
         ext = os.path.splitext(file_name)[1]
         return extension_map.get(ext, 'unknown')
 
-    def chunk_codebase(self, directory: str, file_extensions: List[str]) -> List[Dict]:
+    import os
+    from typing import List, Dict
+
+    def chunk_codebase(self, directory: str, file_extensions: List[str], exclude_dirs: List[str] = None) -> List[Dict]:
         """
         Processes all code files in the specified directory (recursively) that match one of the file extensions,
         extracts function chunks, and preserves file paths along with start and end line numbers.
+
+        Args:
+            directory (str): The root directory to start the codebase traversal.
+            file_extensions (List[str]): A list of file extensions to include in the processing.
+            exclude_dirs (List[str], optional): A list of directory names to exclude from traversal. Defaults to None.
+
+        Returns:
+            List[Dict]: A list of dictionaries containing function chunk information.
         """
+        if exclude_dirs is None:
+            exclude_dirs = []
+
         all_function_chunks = []
-        for root, _, files in os.walk(directory):
+        for root, dirs, files in os.walk(directory):
+            # Modify dirs in-place to exclude specified directories
+            dirs[:] = [d for d in dirs if d not in exclude_dirs]
+
             for file in files:
                 if any(file.endswith(ext) for ext in file_extensions):
                     file_path = os.path.join(root, file)
@@ -173,12 +192,15 @@ class CodeChunker:
                     except Exception as e:
                         print(f"Error reading {file_path}: {e}")
                         continue
+
                     language_name = self.detect_language(file)
                     if language_name == 'unknown':
                         print(f"Skipping unknown language file: {file_path}")
                         continue
+
                     chunks = self.extract_function_chunks(code, language_name, file_path)
                     all_function_chunks.extend(chunks)
+
         return all_function_chunks
 
 

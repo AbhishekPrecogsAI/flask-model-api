@@ -5,15 +5,17 @@ from typing import Union, List, Dict, Any
 from openai import OpenAI, AsyncOpenAI, OpenAIError, RateLimitError, APIConnectionError
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 import asyncio
-
+import argparse
+import yaml
 from pydantic import BaseModel, conint, Field, validator
 import difflib
 import markdown2
-from rag_openai import chunk_source_files, index_chunks, retrieve_relevant_chunks
 from langDetect import detect_language
 
 from semgrep_util import run_semgrep
 from treeChunk import CodeChunker
+from tree_sitter_languages import get_language
+
 
 # Import logging configuration
 from logging_config import setup_logging
@@ -57,12 +59,17 @@ class DetectionResult(BaseModel):
     def convert_risk_level(cls, value):
         """Convert risk level from string labels to CVE-like numeric scores."""
         severity_mapping = {
+            'N/a': 'None',
             "None": 0.0,
             "Low": 1.0,
             "Medium": 4.0,
             "High": 7.0,
             "Critical": 9.0
         }
+
+        if isinstance(value, str) and value.isdigit():
+            value = int(value)
+
         if isinstance(value, str):
             value = value.capitalize()  # Normalize input (e.g., "medium" → "Medium")
             if value in severity_mapping:
@@ -252,28 +259,29 @@ def generate_incident_diff(old_code: str, new_code: str, relevant_lines: list[in
 
 
 
-async def run_detection_no_context(code_snippet: str):
+async def run_detection_no_context(code_snippet: str, lang: str):
     """
     Main function to demonstrate vulnerability analysis.
     """
 
     scan_results = []
     # Step 1: Detect the language
-    language = detect_language(code_snippet)
 
 
 
 
-    if not language:
+
+    if not lang:
         logger.error("Could not detect language.")
         semgrep_results = None
+    else:
 
-    logger.info(f"Detected language: {language}")
-    logger.info("Starting vulnerability analysis...")
+        logger.info(f"Detected language: {lang}")
+        logger.info("Starting vulnerability analysis...")
 
 
-    # Step 2: Run Semgrep on the code
-    semgrep_results = run_semgrep(code_snippet, language)
+        # Step 2: Run Semgrep on the code
+        semgrep_results = run_semgrep(code_snippet, lang)
 
     if semgrep_results:
         logger.info(f"Semgrep found {len(semgrep_results)} potential issues. Passing to GPT.")
@@ -287,22 +295,22 @@ async def run_detection_no_context(code_snippet: str):
         logger.info(json.dumps(result.model_dump(), indent=4))
         scan_results.append(result)
 
-        # print(result.json(indent=4))
-        logger.info("Showing the diff...")
-
-        # Generate Markdown diff
-        relevant_lines = [line.lineNum for line in result.vulnerabilityLines]
-
-        markdown_diff_1 = generate_incident_diff(code_snippet, result.fixCode, relevant_lines)
-        logger.info(markdown_diff_1)
-
-        # Optionally, convert Markdown to HTML for better viewing (e.g., in a browser)
-        html_diff = markdown2.markdown(markdown_diff_1)
-
-        file_id = 'code2'  # use commit id
-
-        with open(f"./{file_id}_diff.html", "w") as f:  # Save as HTML if needed
-            f.write(html_diff)
+        # # print(result.json(indent=4))
+        # logger.info("Showing the diff...")
+        #
+        # # Generate Markdown diff
+        # relevant_lines = [line.lineNum for line in result.vulnerabilityLines]
+        #
+        # markdown_diff_1 = generate_incident_diff(code_snippet, result.fixCode, relevant_lines)
+        # logger.info(markdown_diff_1)
+        #
+        # # Optionally, convert Markdown to HTML for better viewing (e.g., in a browser)
+        # html_diff = markdown2.markdown(markdown_diff_1)
+        #
+        # file_id = 'code2'  # use commit id
+        #
+        # with open(f"./{file_id}_diff.html", "w") as f:  # Save as HTML if needed
+        #     f.write(html_diff)
     else:
         logger.error("Analysis failed with error: %s", result.get("error"))
 
@@ -327,7 +335,8 @@ def combine_chunks(chunks: List[Dict], max_chars: int = 4000) -> List[Dict]:
         if len(current_batch) + len(delimiter) + len(function_text) > max_chars:
             combined_batches.append({
                 'combined_code': current_batch,
-                'functions': metadata
+                'functions': metadata,
+                'lang': chunk['lang']
             })
             current_batch = ""
             metadata = []
@@ -339,11 +348,13 @@ def combine_chunks(chunks: List[Dict], max_chars: int = 4000) -> List[Dict]:
             'file_path': chunk['file_path'],
             'start_line': chunk['start_line'],
             'end_line': chunk['end_line']
+
         })
     if current_batch:
         combined_batches.append({
             'combined_code': current_batch,
-            'functions': metadata
+            'functions': metadata,
+            'lang': chunk['lang']
         })
     return combined_batches
 
@@ -353,7 +364,7 @@ async def process_batch(batch: Dict, semaphore: asyncio.Semaphore) -> Dict:
     Processes a combined batch of function chunks.
     """
     async with semaphore:
-        vulnerabilities = await run_detection_no_context(batch['combined_code'])
+        vulnerabilities = await run_detection_no_context(batch['combined_code'], lang=batch['lang'])
         result = {
             'combined_code': batch['combined_code'],
             'functions': batch['functions'],
@@ -364,13 +375,14 @@ async def process_batch(batch: Dict, semaphore: asyncio.Semaphore) -> Dict:
 
 async def process_and_scan_codebase_batched(chunker: CodeChunker, directory: str,
                                             file_extensions: List[str],
+                                            exclude_dirs: list[str],
                                             batch_size_chars: int = 4000,
                                             max_concurrent: int = 5) -> List[Dict]:
     """
     Processes the codebase to extract function chunks, combines them into larger batches (by character limit),
     and then processes these batches concurrently using the vulnerability scanner.
     """
-    all_chunks = chunker.chunk_codebase(directory, file_extensions)
+    all_chunks = chunker.chunk_codebase(directory, file_extensions, exclude_dirs)
     combined_batches = combine_chunks(all_chunks, max_chars=batch_size_chars)
     semaphore = asyncio.Semaphore(max_concurrent)
 
@@ -378,6 +390,87 @@ async def process_and_scan_codebase_batched(chunker: CodeChunker, directory: str
     results = await asyncio.gather(*tasks)
     return results
 
+def load_config(config_file: str) -> Dict:
+    """
+    Loads the YAML configuration file.
+    """
+    import yaml
+    with open(config_file, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def serialize_pydantic(obj: Any) -> Any:
+    """
+    Recursively converts Pydantic models within a nested structure to dictionaries.
+    """
+    if isinstance(obj, BaseModel):
+        return obj.dict()
+    elif isinstance(obj, list):
+        return [serialize_pydantic(item) for item in obj]
+    elif isinstance(obj, dict):
+        return {key: serialize_pydantic(value) for key, value in obj.items()}
+    else:
+        return obj
+
+def save_results(results: List[Dict], output_file: str):
+    """
+    Saves the detection results to a JSON file.
+    Converts Pydantic models within the results to dictionaries before serialization.
+    """
+    # Recursively serialize Pydantic models
+    results_serializable = serialize_pydantic(results)
+
+    # Write the serialized results to a JSON file
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(results_serializable, f, indent=2)
+
+
+# def save_results(results: List[Union[BaseModel, dict]], output_file: str):
+#     """
+#     Saves the detection results to a JSON file.
+#
+#     Args:
+#         results (List[Union[BaseModel, dict]]): A list of Pydantic model instances or dictionaries representing the detection results.
+#         output_file (str): The path to the output JSON file.
+#     """
+#     # Convert Pydantic models to dictionaries if necessary
+#     results_dicts = [result.dict() if isinstance(result, BaseModel) else result for result in results]
+#
+#     # Write the list of dictionaries to a JSON file
+#     with open(output_file, "w", encoding="utf-8") as f:
+#         json.dump(results_dicts, f, indent=2)
+
+def main2():
+    # Set up logging
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
+
+    # Parse command-line arguments
+    parser_arg = argparse.ArgumentParser(description="Code Vulnerability Scanner")
+    parser_arg.add_argument("--config", type=str, default="config.yaml", help="Path to configuration file")
+    args = parser_arg.parse_args()
+
+    # Load configuration
+    config = load_config(args.config)
+    scan_config = config.get('scan', {})
+    output_config = config.get('output', {})
+
+    directory = scan_config.get('directory', './')
+    file_extensions = scan_config.get('file_extensions', ['.py'])
+    supported_languages = scan_config.get('supported_languages', ['python'])
+    batch_size_chars = scan_config.get('batch_size_chars', 4000)
+    max_concurrent = scan_config.get('max_concurrent', 5)
+    results_file = output_config.get('results_file', 'scan_results.json')
+
+    # Initialize CodeChunker
+    chunker = CodeChunker(supported_languages)
+
+    # Process and scan the codebase asynchronously
+    results = asyncio.run(process_and_scan_codebase_batched(chunker, directory, file_extensions,
+                                                            batch_size_chars=batch_size_chars,
+                                                            max_concurrent=max_concurrent))
+    # Save the results
+    save_results(results, results_file)
+    logging.info(f"Scan results saved to {results_file}")
 
 def compare_detection_results(old_results: List[Dict], new_results: List[Dict]) -> List[Dict]:
     """
@@ -405,6 +498,43 @@ def compare_detection_results(old_results: List[Dict], new_results: List[Dict]) 
             })
     return diff_results
 
+def main():
+    # Set up logging
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
+
+    # Parse command-line arguments
+    parser_arg = argparse.ArgumentParser(description="Code Vulnerability Scanner")
+    parser_arg.add_argument("--config", type=str, default="config.yaml", help="Path to configuration file")
+    # parser_arg.add_argument("--exclude-dirs", type=str, nargs='*', default=[], help="Directories to exclude from scanning")
+    args = parser_arg.parse_args()
+
+    # Load configuration
+    config = load_config(args.config)
+    scan_config = config.get('scan', {})
+    output_config = config.get('output', {})
+
+    directory = scan_config.get('directory', './your_codebase')
+    file_extensions = scan_config.get('file_extensions', ['.py'])
+    exclude_dirs = scan_config.get('exclude_dirs', [])
+
+    supported_languages = scan_config.get('supported_languages', ['python'])
+    batch_size_chars = scan_config.get('batch_size_chars', 4000)
+    max_concurrent = scan_config.get('max_concurrent', 5)
+    results_file = output_config.get('results_file', 'scan_results.json')
+
+    # Initialize CodeChunker
+    chunker = CodeChunker(supported_languages)
+
+    # Process and scan the codebase asynchronously
+    results = asyncio.run(process_and_scan_codebase_batched(chunker,
+                                                            directory,
+                                                            file_extensions,
+                                                            exclude_dirs,
+                                                            batch_size_chars=batch_size_chars,
+                                                            max_concurrent=max_concurrent))
+    # Save the results
+    save_results(results, results_file)
+    logging.info(f"Scan results saved to {results_file}")
 
 if __name__ == "__main__":
 
@@ -431,23 +561,25 @@ if __name__ == "__main__":
     """
 
 
-    asyncio.run(run_detection_no_context(code_2))
+    # asyncio.run(run_detection_no_context(code_2))
+    #
+    # # run scanning a code base
+    # supported_languages = ['python', 'javascript', 'java', 'cpp', 'c', 'go', 'ruby', 'php', 'html', 'css']
+    # chunker = CodeChunker(supported_languages)
+    #
+    # directory = "./"  # Update to your codebase directory
+    # file_extensions = [".py", ".js"]  # Process files with these extensions
+    #
+    # # Process and scan the codebase using batched requests.
+    # results = asyncio.run(process_and_scan_codebase_batched(chunker, directory, file_extensions,
+    #                                                         batch_size_chars=4000, max_concurrent=5))
+    # for res in results:
+    #     print("Combined batch from functions:")
+    #     for func_meta in res['functions']:
+    #         print(f"  File: {func_meta['file_path']}, Lines: {func_meta['start_line']}-{func_meta['end_line']}")
+    #     print("Vulnerabilities for batch:", res['vulnerabilities'])
+    #     print("=" * 50)
 
-    # run scanning a code base
-    supported_languages = ['python', 'javascript', 'java', 'cpp', 'c', 'go', 'ruby', 'php', 'html', 'css']
-    chunker = CodeChunker(supported_languages)
-
-    directory = "./"  # Update to your codebase directory
-    file_extensions = [".py", ".js"]  # Process files with these extensions
-
-    # Process and scan the codebase using batched requests.
-    results = asyncio.run(process_and_scan_codebase_batched(chunker, directory, file_extensions,
-                                                            batch_size_chars=4000, max_concurrent=5))
-    for res in results:
-        print("Combined batch from functions:")
-        for func_meta in res['functions']:
-            print(f"  File: {func_meta['file_path']}, Lines: {func_meta['start_line']}-{func_meta['end_line']}")
-        print("Vulnerabilities for batch:", res['vulnerabilities'])
-        print("=" * 50)
+    main()
 
 
