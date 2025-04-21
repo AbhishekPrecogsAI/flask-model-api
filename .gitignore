@@ -1,3 +1,8 @@
 
 /.idea
 /__pyache__
+__pycache__/semgrep_util.cpython-310.pyc
+/__pycache__
+*.pyc
+.idea/gpt-vul.iml
+.idea/misc.xml
