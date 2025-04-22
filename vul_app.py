@@ -6,7 +6,7 @@ from openai import OpenAI, AsyncOpenAI, OpenAIError, RateLimitError, APIConnecti
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 import asyncio
 import argparse
-from pydantic import BaseModel, conint, Field, validator
+from pydantic import BaseModel, conint, Field, validator, ValidationError
 import difflib
 import hashlib
 
@@ -92,7 +92,7 @@ class DetectionResult(BaseModel):
 
 async def analyze_code_vulnerability(code_snippet: str,
                                      semgrep_results=None,
-                                     judge_id: Optional[int] = None  # Now actually used
+                                     lang=None  # Now actually used
                                      ) -> Union[DetectionResult, dict]:
     """
     Analyze a code snippet for vulnerabilities using OpenAI's API.
@@ -139,29 +139,15 @@ async def analyze_code_vulnerability(code_snippet: str,
 
                 Following the steps for output.
 
-                1. Identify the programming language of the code snippet.
-                2. Analyze the code for any vulnerabilities or security issues, especially against top CWE 30.
-                3. If vulnerabilities are found:
+                1. Based on the programming language {lang}  of the code snippet, analyze the code for any vulnerabilities or security issues, especially against top CWE 30.
+                2. If vulnerabilities are found:
                    - Specify the type of vulnerability.
                    - Map vulnerabilities to CWE categories.
                    - Identify the vulnerable lines of code with the line numbers and the actual code.
-                   - Provide a detailed explanation of why these lines are vulnerable and the potential risks.
-                4. Suggest efficient fixes for the vulnerable lines based on best practices in the identified programming language, *return the entire code block with the fix** included (not just the modified lines)
-                5. Format your entire response as valid JSON.
+                   - Provide a detailed explanation of why these lines are vulnerable and the potential risks
+                   - Suggest efficient fixes for the vulnerable lines based on best practices in the identified programming language, *return the entire code block with the fix** included (not just the modified lines)
+                3. Format your entire response as valid JSON.
                 
-                Output JSON format:
-                {{
-                  "language": "python",
-                  "is_vulnerability": true,
-                  "vulnerabilityType": "SQL Injection",
-                  "cwe": "CWE-89",
-                  "vulnerabilityLines": [
-                    {{"lineNum": 42, "lineCode": "query = f'SELECT * FROM users WHERE id = user_inut'"}}
-                  ],
-                  "riskLevel": 8.2,
-                  "explanation": "Concise technical analysis...",
-                  "fixCode": "parameterized query implementation"
-                }}
 
                 ### Code to analyze:
                 {code_snippet}
@@ -310,10 +296,10 @@ async def run_detection_no_context(code_snippet: str, lang: str):
 
     if semgrep_results:
         logger.info(f"Semgrep found {len(semgrep_results)} potential issues. Passing to GPT.")
-        result = await analyze_code_vulnerability(code_snippet, semgrep_results)
+        result = await analyze_code_vulnerability(code_snippet, semgrep_results, lang)
     else:
         logger.info("Semgrep found no issues. Proceeding with GPT analysis.")
-        result = await analyze_code_vulnerability(code_snippet)
+        result = await analyze_code_vulnerability(code_snippet, '', lang)
 
 
     if isinstance(result, DetectionResult):

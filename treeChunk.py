@@ -54,6 +54,9 @@ class CodeChunker:
         return extension_map.get(ext, 'unknown')
 
     def extract_chunks(self, code: str, language_name: str, file_path: str) -> List[Dict]:
+
+        # code_bytes = code.encode('utf8')
+
         try:
             tree = self.parse_code(code, language_name)
         except Exception as e:
@@ -84,8 +87,12 @@ class CodeChunker:
         def hash_chunk(text: str) -> str:
             return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
+
+
         def is_duplicate_range(start: int, end: int) -> bool:
             return any(start >= s and end <= e for s, e in seen_ranges)
+
+
 
         def is_trivial_function(node) -> bool:
             return (node.end_point[0] - node.start_point[0]) < 2
@@ -95,6 +102,7 @@ class CodeChunker:
                 start_byte, end_byte = node.start_byte, node.end_byte
                 if not is_duplicate_range(start_byte, end_byte):
                     chunk_text = code[start_byte:end_byte]
+                    chunk_text = node.text.decode("utf‑8")
                     if node.type == 'variable_declarator' and len(chunk_text.strip().splitlines()) < 2 and len(
                             chunk_text.strip()) < 30:
                         return
@@ -121,23 +129,27 @@ class CodeChunker:
         if not chunks:
             return self.fallback_semantic_chunks(code, file_path, language_name)
 
-        merged_chunks = []
-        temp_chunk = None
-        for chunk in chunks:
-            if temp_chunk is None:
-                temp_chunk = chunk
-                continue
-            if chunk['start_line'] - temp_chunk['end_line'] <= 2:
-                temp_chunk['function_code'] += '\n' + chunk['function_code']
-                temp_chunk['end_line'] = chunk['end_line']
-                temp_chunk['hash'] = hash_chunk(temp_chunk['function_code'])
-            else:
-                merged_chunks.append(temp_chunk)
-                temp_chunk = chunk
-        if temp_chunk:
-            merged_chunks.append(temp_chunk)
+        chunks.sort(key=lambda c: (c["start_line"], c["end_line"]))
 
-        return merged_chunks
+        merged: List[Dict] = []
+        cur = chunks[0]
+        for nxt in chunks[1:]:
+            # both chunks are fallback (gap) blocks?
+            both_gap = cur.get("is_gap") and nxt.get("is_gap")
+            same_file = cur["file_path"] == nxt["file_path"]
+
+            # merge only if the very next line continues the code
+            directly_adjacent = nxt["start_line"] == cur["end_line"] + 1
+
+            if same_file and both_gap and directly_adjacent:
+                cur["function_code"] += "\n" + nxt["function_code"]
+                cur["end_line"] = nxt["end_line"]
+                cur["hash"] = hashlib.sha256(cur["function_code"].encode()).hexdigest()
+            else:
+                merged.append(cur)
+                cur = nxt
+        merged.append(cur)
+        return merged
 
     def fallback_semantic_chunks(self, code: str, file_path: str, language_name: str) -> List[Dict]:
         lines = code.splitlines()
@@ -215,5 +227,24 @@ class CodeChunker:
 
     def is_supported_file(self, file_name: str, file_extensions: List[str]) -> bool:
         return any(file_name.endswith(ext) for ext in file_extensions)
+
+if __name__ == "__main__":
+    supported_languages = ['python', 'javascript', 'java', 'cpp', 'c', 'go', 'ruby', 'php', 'html', 'css', 'rust']
+    chunker = CodeChunker(supported_languages)
+
+    # Specify the directory and list of file extensions to process.
+    directory = "./data/"  # Update this to your codebase directory
+    file_extensions = [".js"]  # Process both Python and JavaScript files, for example
+
+    all_chunks = chunker.chunk_codebase(directory, file_extensions)
+
+    for chunk_info in all_chunks:
+
+            # Optionally, print chunk information for debugging
+        print(f"File: {chunk_info['file_path']}")
+        print(f"Function starts at line {chunk_info['start_line']} and ends at line {chunk_info['end_line']}")
+        print("Function chunk:")
+        print(chunk_info['function_code'])
+        print("-" * 40)
 
 
