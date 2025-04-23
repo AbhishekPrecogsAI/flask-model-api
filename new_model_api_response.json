@@ -1,0 +1,424 @@
+{
+    "repo_name": "precogsai/Code-Grade-Function",
+    "results": [
+        {
+            "end_line": 15,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "function",
+            "hash": "78f9ac018e554365069108352dacabb7fbd15246edf19400677e3b54fe24e126",
+            "start_line": 15,
+            "vulnerabilities": [
+                {
+                    "cwe": "",
+                    "explanation": "The provided code snippet is incomplete and does not contain enough information to analyze for vulnerabilities. Please provide a complete code snippet for a thorough analysis.",
+                    "fixCode": "",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": ""
+                }
+            ]
+        },
+        {
+            "end_line": 24,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const lowThresholdMin = 0.1;",
+            "hash": "3fc27bbe6140ede51716f8380bbd43e47f8750c0f943d40f6693f65ed4d24d15",
+            "start_line": 24,
+            "vulnerabilities": [
+                {
+                    "cwe": "CWE-20",
+                    "explanation": "The code snippet defines a constant `lowThresholdMin` with a value of 0.1. While this line itself is not directly vulnerable, the context in which this constant is used could lead to vulnerabilities if the value is improperly validated or used in security-critical operations without proper checks.",
+                    "fixCode": "const lowThresholdMin = 0.1;\n\n// Ensure that any usage of lowThresholdMin is validated and does not lead to security issues.\n// For example, if this value is used in a comparison, ensure that the comparison logic is robust and accounts for edge cases.",
+                    "is_vulnerability": true,
+                    "language": "javascript",
+                    "riskLevel": 5.0,
+                    "vulnerabilityLines": [
+                        {
+                            "lineCode": "const lowThresholdMin = 0.1;",
+                            "lineNum": 1
+                        }
+                    ],
+                    "vulnerabilityType": "Improper Input Validation"
+                }
+            ]
+        },
+        {
+            "end_line": 25,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const lowThresholdMax = 3.9;",
+            "hash": "ae7ee3a0a1d395f364d1229ddd0821c3cff8e646b3502b4ec8392cb41ac0c6a2",
+            "start_line": 25,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It only defines a constant variable `lowThresholdMax` with a value of 3.9, which is not used in any context that could lead to a security issue.",
+                    "fixCode": "const lowThresholdMax = 3.9;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 26,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const mediumThresholdMin = 4.0;",
+            "hash": "880ff77d22452e6d8c243410e97effc9bf9b781a4c0deb43aee1d24c29c55b20",
+            "start_line": 26,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It only defines a constant variable `mediumThresholdMin` with a value of 4.0, which is not used in any operations or functions. Without additional context or usage of this variable, there are no security concerns.",
+                    "fixCode": "const mediumThresholdMin = 4.0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 27,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const mediumThresholdMax = 6.9;",
+            "hash": "1a57d5f447d74825d599bbe0cd6cd8ac940003b68a995667df58023738c77c96",
+            "start_line": 27,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It only defines a constant variable `mediumThresholdMax` with a value of 6.9, which is not used in any context that could lead to a security issue.",
+                    "fixCode": "const mediumThresholdMax = 6.9;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 28,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const highThresholdMin = 7.0;",
+            "hash": "bedda5c4fd737f7f98947f5ad27537392354c75eb5f5d13e3611539b4244c718",
+            "start_line": 28,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It only defines a constant variable `highThresholdMin` with a value of 7.0, which is not used in any operations or functions. Without additional context or usage of this variable, there are no security concerns.",
+                    "fixCode": "const highThresholdMin = 7.0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 29,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const highThresholdMax = 8.9;",
+            "hash": "2fca6f685b693cad52230ce4c3bd77747c9893cc34a17ab0d9279e203b48d3a0",
+            "start_line": 29,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It only defines a constant variable `highThresholdMax` with a value of 8.9, which is not used in any operations or functions. Without further context or additional code, there are no security concerns to address.",
+                    "fixCode": "const highThresholdMax = 8.9;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 30,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const criticalThresholdMin = 9.0;",
+            "hash": "5603ac92a7d73a755323beab232fd45e4e12d357ca078521b339b1409a1dd462",
+            "start_line": 30,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It only defines a constant variable and does not perform any operations or logic that could lead to security issues.",
+                    "fixCode": "const criticalThresholdMin = 9.0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 31,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const criticalThresholdMax = 10.0;",
+            "hash": "aba072784b4ea6a69e2bab1f85df0aae9df7b98294b9105a72c1b1192ba07b98",
+            "start_line": 31,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It only defines a constant variable and does not perform any operations that could lead to security issues.",
+                    "fixCode": "const criticalThresholdMax = 10.0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 34,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "let lowCount = 0;",
+            "hash": "a93198067cdb8c61355555ceb6a0a6dece4f07c205126346e0c744478b76e692",
+            "start_line": 34,
+            "vulnerabilities": [
+                {
+                    "cwe": "N/A",
+                    "explanation": "The provided code snippet does not contain any functionality or logic that could lead to a security vulnerability. It only declares a variable `lowCount` and initializes it to 0.",
+                    "fixCode": "let lowCount = 0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 35,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "let mediumCount = 0;",
+            "hash": "479e7d4b63a47cabe5b347f7198cf88d63c8c998898de9f039cf3d7a5878a8c2",
+            "start_line": 35,
+            "vulnerabilities": [
+                {
+                    "cwe": "N/A",
+                    "explanation": "The provided code snippet does not contain any functionality or logic that could lead to a security vulnerability. It only initializes a variable `mediumCount` to 0.",
+                    "fixCode": "let mediumCount = 0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 36,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "let highCount = 0;",
+            "hash": "ba57297eca149082bb75d2525ba47a6bf8ee9c1a87960de836ed28e9a4f1eff6",
+            "start_line": 36,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any vulnerabilities. It simply initializes a variable `highCount` to 0, which is a safe operation.",
+                    "fixCode": "let highCount = 0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 37,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "let criticalCount = 0;",
+            "hash": "cb5c99c2aecd7c818f8eff349e4974d493c6ef45142364ce3ae66c6250841195",
+            "start_line": 37,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It simply initializes a variable named 'criticalCount' to 0, which is a safe operation.",
+                    "fixCode": "let criticalCount = 0;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 54,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const totalCount = arr.length;",
+            "hash": "9267a02e59f31796aa744d3a4ddac80e117c502fcfcaa73b5d4b691fa8d060cb",
+            "start_line": 54,
+            "vulnerabilities": [
+                {
+                    "cwe": "N/A",
+                    "explanation": "The provided code snippet is a simple assignment statement that calculates the length of an array and assigns it to a variable. There are no apparent vulnerabilities in this code.",
+                    "fixCode": "const totalCount = arr.length;",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 55,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const average = arr.reduce((sum, score) => sum + score, 0) / totalCount;",
+            "hash": "17696ff06107a883c3b5b8a0bc9e124a54330be201b9743aa0f4bf21b519ca8f",
+            "start_line": 55,
+            "vulnerabilities": [
+                {
+                    "cwe": "CWE-369",
+                    "explanation": "The code calculates an average by dividing the sum of an array by 'totalCount'. If 'totalCount' is zero, this will result in a division by zero error, which can cause runtime exceptions or undefined behavior.",
+                    "fixCode": "const totalCount = arr.length; // Ensure totalCount is defined and represents the array length\nif (totalCount > 0) {\n  const average = arr.reduce((sum, score) => sum + score, 0) / totalCount;\n} else {\n  console.error(\"Cannot calculate average: totalCount is zero.\");\n}",
+                    "is_vulnerability": true,
+                    "language": "javascript",
+                    "riskLevel": 4.0,
+                    "vulnerabilityLines": [
+                        {
+                            "lineCode": "const average = arr.reduce((sum, score) => sum + score, 0) / totalCount;",
+                            "lineNum": 1
+                        }
+                    ],
+                    "vulnerabilityType": "Potential division by zero"
+                }
+            ]
+        },
+        {
+            "end_line": 81,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const severities1 = [3.0, 3.5, 4.0, 4.5, 3.9];",
+            "hash": "3cece7b9f53ddfa9efaf5370d19a53fd047b30b9b09310d26d9eb600076fec8e",
+            "start_line": 81,
+            "vulnerabilities": [
+                {
+                    "cwe": "",
+                    "explanation": "The provided code snippet defines a constant array of floating-point numbers. There are no operations or logic in the snippet that could lead to a security vulnerability. It is safe as is.",
+                    "fixCode": "const severities1 = [3.0, 3.5, 4.0, 4.5, 3.9];",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": ""
+                }
+            ]
+        },
+        {
+            "end_line": 82,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const severities2 = [2.0, 3.0, 4.5, 4.0];",
+            "hash": "99e991c25c1b1fe47cde88aab74c5ada5953f91717d0e1d96913d1e9aeb22f4f",
+            "start_line": 82,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet does not contain any security vulnerabilities. It simply defines an array of floating-point numbers.",
+                    "fixCode": "const severities2 = [2.0, 3.0, 4.5, 4.0];",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 83,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const severities3 = [4.0, 5.0, 6.0, 7.0, 8];",
+            "hash": "19a3e2315b19b392e21fc9fdf7e08cce13e2b30f67ea0c108e7d3c7346e22767",
+            "start_line": 83,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet defines a constant array of numbers. There are no operations or logic that could lead to a vulnerability in this snippet.",
+                    "fixCode": "const severities3 = [4.0, 5.0, 6.0, 7.0, 8];",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 84,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const severities4 = [9.0, 8.5, 4.0, 2, 3, 5];",
+            "hash": "8dabba1842f7fbe7f777bf25bd3dafa2f33bd54cdbfece75951d46dd57904fb9",
+            "start_line": 84,
+            "vulnerabilities": [
+                {
+                    "cwe": "",
+                    "explanation": "The provided code snippet defines an array of severity values. There are no operations or logic that could introduce vulnerabilities in this snippet.",
+                    "fixCode": "const severities4 = [9.0, 8.5, 4.0, 2, 3, 5];",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": ""
+                }
+            ]
+        },
+        {
+            "end_line": 85,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.js",
+            "function_code": "const severities5 = [7, 4.0, 4.0, 4.0, 3];",
+            "hash": "89de369147096a5e83c130bcc39760aecd1d495e7dc129ceee41f0bef87e5ee4",
+            "start_line": 85,
+            "vulnerabilities": [
+                {
+                    "cwe": "None",
+                    "explanation": "The provided code snippet defines a constant array named 'severities5' with numeric values. This code does not contain any operations or logic that could lead to a security vulnerability. It is a simple data declaration.",
+                    "fixCode": "const severities5 = [7, 4.0, 4.0, 4.0, 3];",
+                    "is_vulnerability": false,
+                    "language": "javascript",
+                    "riskLevel": 0.0,
+                    "vulnerabilityLines": [],
+                    "vulnerabilityType": "None"
+                }
+            ]
+        },
+        {
+            "end_line": 62,
+            "file_path": "./cloned_repos\\Code-Grade-Function\\code_grade.py",
+            "function_code": "def find_grade_type(arr):\n    \"\"\"\n    Determine the grade based on the scores provided in the array.\n\n    Parameters:\n    arr (list of float): A list of float values representing scores.\n\n    Returns:\n    str: The grade based on the scores:\n         'A' - All scores are low (0.1-3.9) and the average score is <= 2.0.\n         'B' - All scores are low (0.1-3.9) or medium (4.0-6.9) with medium scores <= 20% and the average score is <= 3.9.\n         'C' - Average score is <= 5.5, no critical scores (9.0-10.0), and high scores <= 20%.\n         'D' - Critical scores present and <= 20% of the total scores.\n         'E' - More than 20% of the scores are critical.\n         'No Grade' - If the conditions for the above grades are not met.\n\n    If the input is not a list, returns 'Please provide an array of scores'.\n    \"\"\"\n    if not isinstance(arr, list):\n        return 'Please provide an array of scores'\n    \n    # Check if all elements in arr are floats and <= 10\n    for score in arr:\n        if not isinstance(score, (int, float)):\n            return 'Invalid Input: Scores must be float'\n        if score > 10:\n            return 'Invalid Input: Scores must be <= 10'\n\n    if len(arr) == 0:\n        return 'A'\n  \n    # Define the score range thresholds\n    low_threshold_min = 0.1\n    low_threshold_max = 3.9\n    medium_threshold_min = 4.0\n    medium_threshold_max = 6.9\n    high_threshold_min = 7.0\n    high_threshold_max = 8.9\n    critical_threshold_min = 9.0\n    critical_threshold_max = 10.0\n\n    # Calculate the counts\n    low_count = sum(1 for score in arr if low_threshold_min <= score <= low_threshold_max)\n    medium_count = sum(1 for score in arr if medium_threshold_min <= score <= medium_threshold_max)\n    high_count = sum(1 for score in arr if high_threshold_min <= score <= high_threshold_max)\n    critical_count = sum(1 for score in arr if critical_threshold_min <= score <= critical_threshold_max)\n\n    total_count = len(arr)\n    average = sum(arr) / total_count\n\n    if average <= 2 and low_count == total_count:\n        return \"A\"\n    elif average <= 3.9 and low_count + medium_count == total_count and medium_count / total_count <= 0.20:\n        return 'B'\n    elif average <= 5.5 and critical_count == 0 and high_count / total_count <= 0.20:\n        return 'C'\n    elif critical_count / total_count > 0.20:\n        return \"E\"\n    elif critical_count / total_count <= 0.20:\n        return \"D\"\n    else:\n        return \"No Grade\"",
+            "hash": "3ab00cb0b3e67bb709b38550627606217452fbad0ba6f70fac17cd7f0f9c6fd8",
+            "start_line": 1,
+            "vulnerabilities": [
+                {
+                    "cwe": "CWE-20",
+                    "explanation": "The function does not properly validate the input array to ensure all elements are numeric and within the valid range before performing operations. This could lead to unexpected behavior or errors if the input is malformed.",
+                    "fixCode": "def find_grade_type(arr):\n    \"\"\"\n    Determine the grade based on the scores provided in the array.\n\n    Parameters:\n    arr (list of float): A list of float values representing scores.\n\n    Returns:\n    str: The grade based on the scores:\n         'A' - All scores are low (0.1-3.9) and the average score is <= 2.0.\n         'B' - All scores are low (0.1-3.9) or medium (4.0-6.9) with medium scores <= 20% and the average score is <= 3.9.\n         'C' - Average score is <= 5.5, no critical scores (9.0-10.0), and high scores <= 20%.\n         'D' - Critical scores present and <= 20% of the total scores.\n         'E' - More than 20% of the scores are critical.\n         'No Grade' - If the conditions for the above grades are not met.\n\n    If the input is not a list, returns 'Please provide an array of scores'.\n    \"\"\"\n    if not isinstance(arr, list):\n        return 'Please provide an array of scores'\n\n    # Check if all elements in arr are floats and <= 10\n    if not all(isinstance(score, (int, float)) and 0 <= score <= 10 for score in arr):\n        return 'Invalid Input: Scores must be numeric and between 0 and 10'\n\n    if len(arr) == 0:\n        return 'A'\n\n    # Define the score range thresholds\n    low_threshold_min = 0.1\n    low_threshold_max = 3.9\n    medium_threshold_min = 4.0\n    medium_threshold_max = 6.9\n    high_threshold_min = 7.0\n    high_threshold_max = 8.9\n    critical_threshold_min = 9.0\n    critical_threshold_max = 10.0\n\n    # Calculate the counts\n    low_count = sum(1 for score in arr if low_threshold_min <= score <= low_threshold_max)\n    medium_count = sum(1 for score in arr if medium_threshold_min <= score <= medium_threshold_max)\n    high_count = sum(1 for score in arr if high_threshold_min <= score <= high_threshold_max)\n    critical_count = sum(1 for score in arr if critical_threshold_min <= score <= critical_threshold_max)\n\n    total_count = len(arr)\n    average = sum(arr) / total_count\n\n    if average <= 2 and low_count == total_count:\n        return \"A\"\n    elif average <= 3.9 and low_count + medium_count == total_count and medium_count / total_count <= 0.20:\n        return 'B'\n    elif average <= 5.5 and critical_count == 0 and high_count / total_count <= 0.20:\n        return 'C'\n    elif critical_count / total_count > 0.20:\n        return \"E\"\n    elif critical_count / total_count <= 0.20:\n        return \"D\"\n    else:\n        return \"No Grade\"",
+                    "is_vulnerability": true,
+                    "language": "python",
+                    "riskLevel": 5.0,
+                    "vulnerabilityLines": [
+                        {
+                            "lineCode": "if not isinstance(score, (int, float)):",
+                            "lineNum": 13
+                        },
+                        {
+                            "lineCode": "return 'Invalid Input: Scores must be float'",
+                            "lineNum": 14
+                        }
+                    ],
+                    "vulnerabilityType": "Improper Input Validation"
+                }
+            ]
+        }
+    ],
+    "status": "SUCCESS"
+}

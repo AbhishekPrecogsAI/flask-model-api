@@ -6,3 +6,5 @@ __pycache__/semgrep_util.cpython-310.pyc
 *.pyc
 .idea/gpt-vul.iml
 .idea/misc.xml
+venv
+cloned_repos

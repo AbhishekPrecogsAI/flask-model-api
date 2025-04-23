@@ -1,475 +1,9 @@
 [
   {
-    "function_code": "use std::fs::{File, OpenOptions};",
-    "start_line": 1,
-    "end_line": 1,
-    "file_path": "./data/test.rs",
-    "hash": "c86af26697971c75e620bbab34a54c71ece1647302ef5d6c697bbbf9c6176603",
-    "vulnerabilities": [
-      {
-        "language": "rust",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided Rust code snippet does not contain any apparent vulnerabilities. It imports modules for file handling but does not include any functional code that could be analyzed for security issues.",
-        "fixCode": "use std::fs::{File, OpenOptions};"
-      }
-    ]
-  },
-  {
-    "function_code": "use std::io::{self, BufRead, BufReader, Write};",
-    "start_line": 2,
-    "end_line": 2,
-    "file_path": "./data/test.rs",
-    "hash": "037a6f855f5a52611361e89b0f627fda27c4b6d76e90d4721ca34015818ea2e4",
-    "vulnerabilities": [
-      {
-        "language": "rust",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet does not contain enough information to identify any vulnerabilities. It appears to be a partial or incomplete code snippet.",
-        "fixCode": "use std::io::{self, BufRead, BufReader, Write};"
-      }
-    ]
-  },
-  {
-    "function_code": "fn main() -> io::Result<()> {\n    let file_path = \"example.txt\";\n\n    // Create and write to the file\n    let mut file = File::create(file_path)?;\n    writeln!(file, \"Line 1: Hello, Rust!\")?;\n    writeln!(file, \"Line 2: File I/O example.\")?;\n    writeln!(file, \"Line 3: Testing CodeChunker.\")?;\n\n    // Read the file line by line\n    let file = File::open(file_path)?;\n    let reader = BufReader::new(file);\n\n    println!(\"Reading contents of '{}':\", file_path);\n    for line in reader.lines() {\n        println!(\"{}\", line?);\n    }\n\n    // Append a new line to the file\n    let mut file = OpenOptions::new().append(true).open(file_path)?;\n    writeln!(file, \"Line 4: Appending a new line.\")?;\n\n    Ok(())\n}",
-    "start_line": 4,
-    "end_line": 27,
-    "file_path": "./data/test.rs",
-    "hash": "5e71ecfec8eb6f71256f90bedc35509730dde88d98cab05890f5a0f0264c4d08",
-    "vulnerabilities": [
-      {
-        "language": "rust",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided Rust code snippet does not contain any vulnerabilities. It performs file operations securely and handles errors appropriately using the `?` operator.",
-        "fixCode": "fn main() -> io::Result<()> {\n    let file_path = \"example.txt\";\n\n    // Create and write to the file\n    let mut file = File::create(file_path)?;\n    writeln!(file, \"Line 1: Hello, Rust!\")?;\n    writeln!(file, \"Line 2: File I/O example.\")?;\n    writeln!(file, \"Line 3: Testing CodeChunker.\")?;\n\n    // Read the file line by line\n    let file = File::open(file_path)?;\n    let reader = BufReader::new(file);\n\n    println!(\"Reading contents of '{}':\", file_path);\n    for line in reader.lines() {\n        println!(\"{}\", line?);\n    }\n\n    // Append a new line to the file\n    let mut file = OpenOptions::new().append(true).open(file_path)?;\n    writeln!(file, \"Line 4: Appending a new line.\")?;\n\n    Ok(())\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "class Rectangle {\n  constructor(height, width) {\n    this.height = height;\n    this.width = width;\n  }\n\n  area() {\n    return this.height * this.width;\n  }\n}",
-    "start_line": 7,
-    "end_line": 16,
-    "file_path": "./data/test.js",
-    "hash": "f6e7f6f584ecb3d238ee2518512ce71f896279c0eb094872d83d8d0578c6eb33",
-    "vulnerabilities": [
-      {
-        "language": "javascript",
-        "is_vulnerability": false,
-        "vulnerabilityType": "None",
-        "cwe": "None",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code defines a simple Rectangle class in JavaScript with a constructor and an area method. There are no apparent vulnerabilities in this code.",
-        "fixCode": "class Rectangle {\n  constructor(height, width) {\n    this.height = height;\n    this.width = width;\n  }\n\n  area() {\n    return this.height * this.width;\n  }\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "function",
-    "start_line": 19,
-    "end_line": 19,
-    "file_path": "./data/test.js",
-    "hash": "78f9ac018e554365069108352dacabb7fbd15246edf19400677e3b54fe24e126",
-    "vulnerabilities": [
-      {
-        "language": "javascript",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet is incomplete and does not contain enough information to analyze for vulnerabilities. It appears to be a partial function definition without any implementation or context.",
-        "fixCode": "// Please provide a complete code snippet for analysis."
-      }
-    ]
-  },
-  {
-    "function_code": "const multiply = (a, b) => a * b;",
-    "start_line": 24,
-    "end_line": 24,
-    "file_path": "./data/test.js",
-    "hash": "2128148b1bcae3f69677a222e3d5aa9c36eb4dd298e7cd7ba4b640f5744615bf",
-    "vulnerabilities": [
-      {
-        "language": "javascript",
-        "is_vulnerability": false,
-        "vulnerabilityType": "None",
-        "cwe": "None",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet defines a simple JavaScript function named 'multiply' that takes two arguments and returns their product. This function does not contain any security vulnerabilities as it does not interact with external inputs or perform operations that could lead to security issues.",
-        "fixCode": "const multiply = (a, b) => a * b;"
-      }
-    ]
-  },
-  {
-    "function_code": "const PI = 3.14;",
-    "start_line": 27,
-    "end_line": 27,
-    "file_path": "./data/test.js",
-    "hash": "63081846250477a084b8114798abc5645ede976142188acc2a5fdbd58a2c26b1",
-    "vulnerabilities": [
-      {
-        "language": "javascript",
-        "is_vulnerability": false,
-        "vulnerabilityType": "None",
-        "cwe": "None",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet only declares a constant variable `PI` with the value `3.14`. There are no operations, functions, or logic that could introduce vulnerabilities.",
-        "fixCode": "const PI = 3.14;"
-      }
-    ]
-  },
-  {
-    "function_code": "type Rectangle struct {\n\tHeight float64\n\tWidth  float64\n}",
-    "start_line": 9,
-    "end_line": 12,
-    "file_path": "./data/test.go",
-    "hash": "ef4084e3c67ea4c74b39165266713887c15446dcc4bbc6430ce1b7d6084ed8d4",
-    "vulnerabilities": [
-      {
-        "language": "Go",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet defines a simple struct in Go and does not contain any functionality or logic that could lead to a vulnerability. It is safe as is.",
-        "fixCode": "type Rectangle struct {\n\tHeight float64\n\tWidth  float64\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "func (r Rectangle) Area() float64 {\n\treturn r.Height * r.Width\n}",
-    "start_line": 15,
-    "end_line": 17,
-    "file_path": "./data/test.go",
-    "hash": "88f7a392872541a799748536ef0bf20997ab2d50935915da6acebb95609964ff",
-    "vulnerabilities": [
-      {
-        "language": "Go",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code defines a simple method for a Rectangle struct in Go to calculate its area. There are no apparent vulnerabilities in this code as it does not involve any user input, external data handling, or unsafe operations.",
-        "fixCode": "func (r Rectangle) Area() float64 {\n\treturn r.Height * r.Width\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "func (r Rectangle) Perimeter() float64 {\n\treturn 2 * (r.Height + r.Width)\n}",
-    "start_line": 20,
-    "end_line": 22,
-    "file_path": "./data/test.go",
-    "hash": "8700f0261ad731b3d00d3aaeb1d310381873864f2df3b81328567b5dcfa7da03",
-    "vulnerabilities": [
-      {
-        "language": "Go",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided Go code defines a method `Perimeter` for a `Rectangle` struct, which calculates the perimeter of the rectangle. This code does not contain any apparent vulnerabilities. It performs a simple arithmetic operation and does not involve any user input or external interactions that could lead to security issues.",
-        "fixCode": "func (r Rectangle) Perimeter() float64 {\n\treturn 2 * (r.Height + r.Width)\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "func SayHello(name string) {\n\tfmt.Printf(\"Hello, %s!\\n\", name)\n}",
-    "start_line": 25,
-    "end_line": 27,
-    "file_path": "./data/test.go",
-    "hash": "f367ef67fa60ac808c6e7ace06b33e7a758e235c3e669d2b76bea6c48f207a49",
-    "vulnerabilities": [
-      {
-        "language": "Go",
-        "is_vulnerability": true,
-        "vulnerabilityType": "Uncontrolled Format String",
-        "cwe": "CWE-134",
-        "vulnerabilityLines": [
-          {
-            "lineNum": 2,
-            "lineCode": "fmt.Printf(\"Hello, %s!\\n\", name)"
-          }
-        ],
-        "riskLevel": 7.5,
-        "explanation": "The code uses fmt.Printf with a user-controlled input (name) as part of the format string. If the input is not properly sanitized, it could lead to a format string vulnerability, where an attacker could inject format specifiers to manipulate the output or access unintended memory.",
-        "fixCode": "func SayHello(name string) {\n\tfmt.Printf(\"Hello, %s!\\n\", fmt.Sprintf(\"%s\", name))\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "func Multiply(a, b int) int {\n\treturn a * b\n}",
-    "start_line": 30,
-    "end_line": 32,
-    "file_path": "./data/test.go",
-    "hash": "e98a24f82597db5e16dc4e06c2a65bd22472f8a1738994079394915801db727a",
-    "vulnerabilities": [
-      {
-        "language": "Go",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided Go code defines a simple function `Multiply` that takes two integers as input and returns their product. This function does not contain any vulnerabilities or security issues. It performs a straightforward arithmetic operation without any external dependencies or user input.",
-        "fixCode": "func Multiply(a, b int) int {\n\treturn a * b\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "func CircleArea(radius float64) float64 {\n\treturn PI * math.Pow(radius, 2)\n}",
-    "start_line": 38,
-    "end_line": 40,
-    "file_path": "./data/test.go",
-    "hash": "01693f96d02e8346cb20b25d5168c52c3dff9088d69b2fb4f2abbf3316dab846",
-    "vulnerabilities": [
-      {
-        "language": "Go",
-        "is_vulnerability": true,
-        "vulnerabilityType": "Use of Undefined Constant",
-        "cwe": "CWE-682",
-        "vulnerabilityLines": [
-          {
-            "lineNum": 2,
-            "lineCode": "return PI * math.Pow(radius, 2)"
-          }
-        ],
-        "riskLevel": 4.0,
-        "explanation": "The code uses a constant 'PI' which is not defined within the function or imported from any package. This will cause a runtime error or undefined behavior.",
-        "fixCode": "package main\n\nimport (\n\t\"math\"\n)\n\nconst PI = 3.141592653589793\n\nfunc CircleArea(radius float64) float64 {\n\treturn PI * math.Pow(radius, 2)\n}\n\nfunc main() {\n\t// Example usage\n\tarea := CircleArea(5.0)\n\tprintln(\"Area of the circle:\", area)\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "func main() {\n\trect := Rectangle{Height: 10, Width: 5}\n\tfmt.Println(\"Area:\", rect.Area())\n\tfmt.Println(\"Perimeter:\", rect.Perimeter())\n\n\tSayHello(\"Alice\")\n\tfmt.Println(\"Product:\", Multiply(3, 4))\n\tfmt.Println(\"Circle Area:\", CircleArea(7))\n}",
-    "start_line": 43,
-    "end_line": 51,
-    "file_path": "./data/test.go",
-    "hash": "a2dc5212c9dd68443f66a85d7065860081ea633578447315510bca396c74912f",
-    "vulnerabilities": [
-      {
-        "language": "Go",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided Go code snippet does not contain any apparent vulnerabilities. It defines a main function that performs various operations, such as calculating the area and perimeter of a rectangle, greeting a user, multiplying two numbers, and calculating the area of a circle. All operations appear to be safe and do not involve unsafe practices or external inputs.",
-        "fixCode": "func main() {\n\trect := Rectangle{Height: 10, Width: 5}\n\tfmt.Println(\"Area:\", rect.Area())\n\tfmt.Println(\"Perimeter:\", rect.Perimeter())\n\n\tSayHello(\"Alice\")\n\tfmt.Println(\"Product:\", Multiply(3, 4))\n\tfmt.Println(\"Circle Area:\", CircleArea(7))\n}"
-      }
-    ]
-  },
-  {
-    "function_code": "def foo(x, y=10):\n    '''Adds two numbers with default second parameter.'''\n    return x + y",
-    "start_line": 11,
-    "end_line": 13,
-    "file_path": "./data/test.py",
-    "hash": "742f1e8b04a432a0e289aed7bf75db9240210c88f16dfd34bbe2e8fa9e5dd041",
-    "vulnerabilities": [
-      {
-        "language": "python",
-        "is_vulnerability": false,
-        "vulnerabilityType": "None",
-        "cwe": "None",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided Python code defines a simple function `foo` that adds two numbers, with a default value for the second parameter. There are no apparent vulnerabilities in this code.",
-        "fixCode": "def foo(x, y=10):\n    '''Adds two numbers with default second parameter.'''\n    return x + y"
-      }
-    ]
-  },
-  {
-    "function_code": "def outer(a):\n    def inner(b):\n        return b * 2\n    sq = lambda z: z ** 2\n    return inner(a) + sq(a)",
-    "start_line": 16,
-    "end_line": 20,
-    "file_path": "./data/test.py",
-    "hash": "7ba85499e16db2d44ef72ff9205967e12f1e6bd74323e11d57ff7040a1aeff28",
-    "vulnerabilities": [
-      {
-        "language": "python",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code defines a Python function `outer` that contains a nested function `inner` and a lambda function `sq`. The code does not perform any operations that involve user input or external data, and there are no indications of unsafe practices or vulnerabilities in the code. The operations performed are mathematical and do not involve any security-sensitive operations.",
-        "fixCode": "def outer(a):\n    def inner(b):\n        return b * 2\n    sq = lambda z: z ** 2\n    return inner(a) + sq(a)"
-      }
-    ]
-  },
-  {
-    "function_code": "async def fetch_data(url: str) -> dict:\n    import aiohttp\n    async with aiohttp.ClientSession() as session:\n        async with session.get(url) as resp:\n            return await resp.json()",
-    "start_line": 23,
-    "end_line": 27,
-    "file_path": "./data/test.py",
-    "hash": "478caa9b2ab919cba78a360aee840804730927e9d2cba2bc9b58cf605ac2e4c8",
-    "vulnerabilities": [
-      {
-        "language": "python",
-        "is_vulnerability": true,
-        "vulnerabilityType": "Improper Certificate Validation",
-        "cwe": "CWE-295",
-        "vulnerabilityLines": [
-          {
-            "lineNum": 4,
-            "lineCode": "async with session.get(url) as resp:"
-          }
-        ],
-        "riskLevel": 4.0,
-        "explanation": "The code uses aiohttp to make an HTTP request but does not specify whether SSL certificate validation is enforced. By default, aiohttp validates SSL certificates, but if the 'ssl' parameter is set to False or improperly configured, it could lead to security risks such as man-in-the-middle attacks.",
-        "fixCode": "async def fetch_data(url: str) -> dict:\n    import aiohttp\n    import ssl\n    ssl_context = ssl.create_default_context()\n    async with aiohttp.ClientSession() as session:\n        async with session.get(url, ssl=ssl_context) as resp:\n            return await resp.json()"
-      }
-    ]
-  },
-  {
-    "function_code": "def log_calls(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        print(f\"Calling {func.__name__}\")\n        return func(*args, **kwargs)\n    return wrapper",
-    "start_line": 32,
-    "end_line": 37,
-    "file_path": "./data/test.py",
-    "hash": "9e8ad41688c53ee6d1f294d9b3d7e90ff47a55d092aa63aeddcaf486c97aac21",
-    "vulnerabilities": [
-      {
-        "language": "python",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet defines a Python decorator function `log_calls` that logs the name of the function being called. It does not contain any apparent vulnerabilities or security issues. The use of `@wraps(func)` ensures that the metadata of the original function is preserved, which is a good practice.",
-        "fixCode": "def log_calls(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        print(f\"Calling {func.__name__}\")\n        return func(*args, **kwargs)\n    return wrapper"
-      }
-    ]
-  },
-  {
-    "function_code": "class Container:\n    items: list\n\n    @staticmethod\n    def empty():\n        return Container([])\n\n    @classmethod\n    def singleton(cls, item):\n        return cls([item])\n\n    @log_calls\n    def add(self, item):\n        self.items.append(item)\n        return self.items",
-    "start_line": 40,
-    "end_line": 54,
-    "file_path": "./data/test.py",
-    "hash": "32a9d3c8ea84562b2d5312a9ee5c675484c85989af9d88672e76fe66db86a4bb",
-    "vulnerabilities": [
-      {
-        "language": "python",
-        "is_vulnerability": true,
-        "vulnerabilityType": "Improper Initialization",
-        "cwe": "CWE-665",
-        "vulnerabilityLines": [
-          {
-            "lineNum": 2,
-            "lineCode": "items: list"
-          }
-        ],
-        "riskLevel": 4.0,
-        "explanation": "The 'items' attribute in the 'Container' class is declared but not properly initialized. This can lead to unexpected behavior when the attribute is accessed before being explicitly set.",
-        "fixCode": "class Container:\n    def __init__(self):\n        self.items = []\n\n    @staticmethod\n    def empty():\n        return Container()\n\n    @classmethod\n    def singleton(cls, item):\n        container = cls()\n        container.items.append(item)\n        return container\n\n    @log_calls\n    def add(self, item):\n        self.items.append(item)\n        return self.items"
-      }
-    ]
-  },
-  {
-    "function_code": "def countdown(n: int):\n    while n > 0:\n        yield n\n        n -= 1",
-    "start_line": 57,
-    "end_line": 60,
-    "file_path": "./data/test.py",
-    "hash": "5dab7c1d892de590b8938c64f0729a46fad23c46de73f9d25b8490ec15bb4ae3",
-    "vulnerabilities": [
-      {
-        "language": "Python",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code defines a generator function `countdown` that yields numbers from `n` down to 1. There are no apparent vulnerabilities in this code as it does not involve any unsafe operations or external inputs.",
-        "fixCode": "def countdown(n: int):\n    while n > 0:\n        yield n\n        n -= 1"
-      }
-    ]
-  },
-  {
-    "function_code": "def process_data(data: list[dict[str, int]], *, flag: bool = False) -> tuple[int, int]:\n    \"\"\"Processes a list of dicts, returns min and max of 'value' keys.\"\"\"\n    values = [d['value'] for d in data if 'value' in d]\n    if flag:\n        values = [v for v in values if v > 0]\n    return min(values), max(values)",
-    "start_line": 63,
-    "end_line": 68,
-    "file_path": "./data/test.py",
-    "hash": "b8055093b8720431eb7b28450c731917c8e441f7c115ef74c3222ccc5d7d7a41",
-    "vulnerabilities": [
-      {
-        "language": "python",
-        "is_vulnerability": true,
-        "vulnerabilityType": "Improper Input Validation",
-        "cwe": "CWE-20",
-        "vulnerabilityLines": [
-          {
-            "lineNum": 3,
-            "lineCode": "values = [d['value'] for d in data if 'value' in d]"
-          },
-          {
-            "lineNum": 6,
-            "lineCode": "return min(values), max(values)"
-          }
-        ],
-        "riskLevel": 4.0,
-        "explanation": "The code does not validate the input data properly. If the input list 'data' is empty or if all dictionaries in 'data' lack the 'value' key, the 'values' list will be empty. This will cause the 'min' and 'max' functions to raise a ValueError when called on an empty sequence.",
-        "fixCode": "def process_data(data: list[dict[str, int]], *, flag: bool = False) -> tuple[int, int]:\n    \"\"\"Processes a list of dicts, returns min and max of 'value' keys.\"\"\"\n    values = [d['value'] for d in data if 'value' in d]\n    if flag:\n        values = [v for v in values if v > 0]\n    if not values:\n        raise ValueError(\"No valid 'value' entries found in the input data.\")\n    return min(values), max(values)"
-      }
-    ]
-  },
-  {
-    "function_code": "template<typename T>  // Template chunk\nclass Container {     // Class chunk\npublic:\n    void add(T item) {\n        // Method chunk\n    }\n};",
-    "start_line": 1,
-    "end_line": 7,
-    "file_path": "./data/test3.cpp",
-    "hash": "f06e997e08d0fa5b9e8227478751447443f3d77451e31c8b9a62c9b712e9d9c3",
-    "vulnerabilities": [
-      {
-        "language": "cpp",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided C++ code defines a template class `Container` with a single method `add`. The code does not contain any implementation details or logic that could lead to vulnerabilities. It is a simple declaration of a class template.",
-        "fixCode": "template<typename T>  // Template chunk\nclass Container {     // Class chunk\npublic:\n    void add(T item) {\n        // Method chunk\n    }\n};"
-      }
-    ]
-  },
-  {
-    "function_code": "namespace utils {     // Namespace chunk\n    void helper() {}\n}",
-    "start_line": 9,
-    "end_line": 11,
-    "file_path": "./data/test3.cpp",
-    "hash": "773fb3b1565067b9a452277118c9c3b134375baa1480e96ac9a3d1a45e78185d",
-    "vulnerabilities": [
-      {
-        "language": "cpp",
-        "is_vulnerability": false,
-        "vulnerabilityType": "None",
-        "cwe": "None",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet defines a namespace 'utils' and a function 'helper' within it. There are no operations or logic in the function that could lead to vulnerabilities.",
-        "fixCode": "namespace utils {\n    // Namespace chunk\n    void helper() {}\n}"
-      }
-    ]
-  },
-  {
     "function_code": "static char __percpu *perf_trace_buf[PERF_NR_CONTEXTS];",
     "start_line": 10,
     "end_line": 10,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "269e7f845c90f5422d23344eb5ac2b329f6a649f7d3e234831c2b7ce05bd35d1",
     "vulnerabilities": [
       {
@@ -479,7 +13,7 @@
         "cwe": "",
         "vulnerabilityLines": [],
         "riskLevel": 0.0,
-        "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It defines a static per-CPU buffer array, which is a common practice in kernel programming for performance tracing. Without additional context or usage of this buffer, no security issues can be identified.",
+        "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It defines a static per-CPU buffer array, which is a common practice in kernel programming. Without additional context or usage of this variable, no security issues can be identified.",
         "fixCode": "static char __percpu *perf_trace_buf[PERF_NR_CONTEXTS];"
       }
     ]
@@ -488,7 +22,7 @@
     "function_code": "static int\ttotal_ref_count;",
     "start_line": 18,
     "end_line": 18,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "9debddd8b4183244008ebc534bf48dd04f2d89ed87c4f56b1c96ab9262e32b70",
     "vulnerabilities": [
       {
@@ -499,11 +33,11 @@
         "vulnerabilityLines": [
           {
             "lineNum": 1,
-            "lineCode": "static int\ttotal_ref_count;"
+            "lineCode": "static int total_ref_count;"
           }
         ],
         "riskLevel": 4.0,
-        "explanation": "The global variable 'total_ref_count' is declared as static, which limits its scope to the file. However, if this variable is accessed or modified in a multithreaded environment without proper synchronization, it could lead to race conditions.",
+        "explanation": "The global variable 'total_ref_count' is declared as static, which limits its scope to the file. However, if this variable is accessed or modified by multiple threads without proper synchronization, it can lead to race conditions. This is a common issue in multithreaded programs where shared resources are not properly protected.",
         "fixCode": "#include <pthread.h>\n\nstatic int total_ref_count;\nstatic pthread_mutex_t ref_count_mutex = PTHREAD_MUTEX_INITIALIZER;\n\nvoid increment_ref_count() {\n    pthread_mutex_lock(&ref_count_mutex);\n    total_ref_count++;\n    pthread_mutex_unlock(&ref_count_mutex);\n}\n\nvoid decrement_ref_count() {\n    pthread_mutex_lock(&ref_count_mutex);\n    total_ref_count--;\n    pthread_mutex_unlock(&ref_count_mutex);\n}\n\nint get_ref_count() {\n    int count;\n    pthread_mutex_lock(&ref_count_mutex);\n    count = total_ref_count;\n    pthread_mutex_unlock(&ref_count_mutex);\n    return count;\n}"
       }
     ]
@@ -512,27 +46,27 @@
     "function_code": "static int perf_trace_event_perm(struct ftrace_event_call *tp_event,\n\t\t\t\t struct perf_event *p_event)\n{\n\t/* The ftrace function trace is allowed only for root. */\n\tif (ftrace_event_is_function(tp_event) &&\n\t    perf_paranoid_kernel() && !capable(CAP_SYS_ADMIN))\n\t\treturn -EPERM;\n\n\t/* No tracing, just counting, so no obvious leak */\n\n\n\n\n\n\n\n          Expand Down\n\n\n\n\tif (!(p_event->attr.sample_type & PERF_SAMPLE_RAW))\n\t\treturn 0;\n\t/* Some events are ok to be traced by non-root users... */\n\tif (p_event->attach_state == PERF_ATTACH_TASK) {\n\t\tif (tp_event->flags & TRACE_EVENT_FL_CAP_ANY)\n\t\t\treturn 0;\n\t}\n\t/*\n\t * ...otherwise raw tracepoint data can be a severe data leak,\n\t * only allow root to have these.\n\t */\n\tif (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))\n\t\treturn -EPERM;\n\treturn 0;\n}",
     "start_line": 19,
     "end_line": 53,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "931d204fa448c22b2512a18b3db79763b44a355f107b5516548dc14ce432af54",
     "vulnerabilities": [
       {
         "language": "C",
         "is_vulnerability": true,
-        "vulnerabilityType": "Improper Access Control",
-        "cwe": "CWE-284",
+        "vulnerabilityType": "Improper Authorization",
+        "cwe": "CWE-285",
         "vulnerabilityLines": [
           {
-            "lineNum": 6,
-            "lineCode": "if (ftrace_event_is_function(tp_event) && perf_paranoid_kernel() && !capable(CAP_SYS_ADMIN))"
+            "lineNum": 13,
+            "lineCode": "if (!(p_event->attr.sample_type & PERF_SAMPLE_RAW))"
           },
           {
             "lineNum": 20,
             "lineCode": "if (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))"
           }
         ],
-        "riskLevel": 7.0,
-        "explanation": "The function `perf_trace_event_perm` contains checks to restrict access to certain tracing functionalities based on user capabilities. However, the logic might not cover all edge cases or might be bypassed if the capability checks are not comprehensive. Specifically, the checks rely on the `capable` function, which might not account for all scenarios where access should be restricted.",
-        "fixCode": "static int perf_trace_event_perm(struct ftrace_event_call *tp_event,\n\t\t\t\t struct perf_event *p_event)\n{\n\t/* The ftrace function trace is allowed only for root. */\n\tif (ftrace_event_is_function(tp_event) &&\n\t    perf_paranoid_kernel() && !capable(CAP_SYS_ADMIN))\n\t\treturn -EPERM;\n\n\t/* No tracing, just counting, so no obvious leak */\n\tif (!(p_event->attr.sample_type & PERF_SAMPLE_RAW))\n\t\treturn 0;\n\n\t/* Some events are ok to be traced by non-root users... */\n\tif (p_event->attach_state == PERF_ATTACH_TASK) {\n\t\tif (tp_event->flags & TRACE_EVENT_FL_CAP_ANY)\n\t\t\treturn 0;\n\t}\n\n\t/*\n\t * ...otherwise raw tracepoint data can be a severe data leak,\n\t * only allow root to have these.\n\t */\n\tif (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))\n\t\treturn -EPERM;\n\n\t/* Additional check to ensure no unintended access */\n\tif (!capable(CAP_SYS_ADMIN)) {\n\t\t/* Log or handle unauthorized access attempt */\n\t\treturn -EPERM;\n\t}\n\n\treturn 0;\n}"
+        "riskLevel": 4.0,
+        "explanation": "The function `perf_trace_event_perm` checks permissions for tracing events, but the logic might allow unauthorized access to sensitive data under certain conditions. Specifically, the checks for `PERF_SAMPLE_RAW` and `TRACE_EVENT_FL_CAP_ANY` might not be sufficient to prevent data leaks.",
+        "fixCode": "static int perf_trace_event_perm(struct ftrace_event_call *tp_event,\n\t\t\t struct perf_event *p_event)\n{\n\t/* The ftrace function trace is allowed only for root. */\n\tif (ftrace_event_is_function(tp_event) &&\n\t    perf_paranoid_kernel() && !capable(CAP_SYS_ADMIN))\n\t\treturn -EPERM;\n\n\t/* No tracing, just counting, so no obvious leak */\n\tif (!(p_event->attr.sample_type & PERF_SAMPLE_RAW))\n\t\treturn 0;\n\n\t/* Some events are ok to be traced by non-root users... */\n\tif (p_event->attach_state == PERF_ATTACH_TASK) {\n\t\tif (tp_event->flags & TRACE_EVENT_FL_CAP_ANY)\n\t\t\treturn 0;\n\t}\n\n\t/* Additional check to ensure only authorized users can access raw tracepoint data */\n\tif (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN)) {\n\t\tif (!(tp_event->flags & TRACE_EVENT_FL_CAP_ANY)) {\n\t\t\treturn -EPERM;\n\t\t}\n\t}\n\n\treturn 0;\n}"
       }
     ]
   },
@@ -540,7 +74,7 @@
     "function_code": "static int perf_trace_event_reg(struct ftrace_event_call *tp_event,\n\t\t\t\tstruct perf_event *p_event)\n{\n\tstruct hlist_head __percpu *list;\n\tint ret = -ENOMEM;\n\tint cpu;\n\tp_event->tp_event = tp_event;\n\tif (tp_event->perf_refcount++ > 0)\n\t\treturn 0;\n\tlist = alloc_percpu(struct hlist_head);\n\tif (!list)\n\t\tgoto fail;\n\tfor_each_possible_cpu(cpu)\n\t\tINIT_HLIST_HEAD(per_cpu_ptr(list, cpu));\n\ttp_event->perf_events = list;\n\tif (!total_ref_count) {\n\t\tchar __percpu *buf;\n\t\tint i;\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tbuf = (char __percpu *)alloc_percpu(perf_trace_t);\n\t\t\tif (!buf)\n\t\t\t\tgoto fail;\n\t\t\tperf_trace_buf[i] = buf;\n\t\t}\n\t}\n\tret = tp_event->class->reg(tp_event, TRACE_REG_PERF_REGISTER, NULL);\n\tif (ret)\n\t\tgoto fail;\n\ttotal_ref_count++;\n\treturn 0;\nfail:\n\tif (!total_ref_count) {\n\t\tint i;\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tfree_percpu(perf_trace_buf[i]);\n\t\t\tperf_trace_buf[i] = NULL;\n\t\t}\n\t}\n\tif (!--tp_event->perf_refcount) {\n\t\tfree_percpu(tp_event->perf_events);\n\t\ttp_event->perf_events = NULL;\n\t}\n\treturn ret;\n}",
     "start_line": 54,
     "end_line": 97,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "6d9e4322a83f9ca6395cd86ca1ccdadfa1e00ad12606fcfc29134256457422b1",
     "vulnerabilities": [
       {
@@ -554,13 +88,13 @@
             "lineCode": "list = alloc_percpu(struct hlist_head);"
           },
           {
-            "lineNum": 23,
+            "lineNum": 28,
             "lineCode": "buf = (char __percpu *)alloc_percpu(perf_trace_t);"
           }
         ],
         "riskLevel": 4.0,
-        "explanation": "The code allocates resources using alloc_percpu but does not ensure proper deallocation in all failure paths, leading to potential memory leaks.",
-        "fixCode": "static int perf_trace_event_reg(struct ftrace_event_call *tp_event,\n\t\t\t\tstruct perf_event *p_event)\n{\n\tstruct hlist_head __percpu *list;\n\tint ret = -ENOMEM;\n\tint cpu;\n\tp_event->tp_event = tp_event;\n\tif (tp_event->perf_refcount++ > 0)\n\t\treturn 0;\n\tlist = alloc_percpu(struct hlist_head);\n\tif (!list)\n\t\tgoto fail;\n\tfor_each_possible_cpu(cpu)\n\t\tINIT_HLIST_HEAD(per_cpu_ptr(list, cpu));\n\ttp_event->perf_events = list;\n\tif (!total_ref_count) {\n\t\tchar __percpu *buf;\n\t\tint i;\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tbuf = (char __percpu *)alloc_percpu(perf_trace_t);\n\t\t\tif (!buf)\n\t\t\t\tgoto fail_buf;\n\t\t\tperf_trace_buf[i] = buf;\n\t\t}\n\t}\n\tret = tp_event->class->reg(tp_event, TRACE_REG_PERF_REGISTER, NULL);\n\tif (ret)\n\t\tgoto fail;\n\ttotal_ref_count++;\n\treturn 0;\nfail_buf:\n\twhile (--i >= 0) {\n\t\tfree_percpu(perf_trace_buf[i]);\n\t\tperf_trace_buf[i] = NULL;\n\t}\nfail:\n\tif (!total_ref_count) {\n\t\tint i;\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tfree_percpu(perf_trace_buf[i]);\n\t\t\tperf_trace_buf[i] = NULL;\n\t\t}\n\t}\n\tif (!--tp_event->perf_refcount) {\n\t\tfree_percpu(tp_event->perf_events);\n\t\ttp_event->perf_events = NULL;\n\t}\n\treturn ret;\n}"
+        "explanation": "The code allocates resources using alloc_percpu but does not ensure proper deallocation in all error paths, leading to potential memory leaks.",
+        "fixCode": "static int perf_trace_event_reg(struct ftrace_event_call *tp_event,\n\t\t\t\tstruct perf_event *p_event)\n{\n\tstruct hlist_head __percpu *list;\n\tint ret = -ENOMEM;\n\tint cpu;\n\tp_event->tp_event = tp_event;\n\tif (tp_event->perf_refcount++ > 0)\n\t\treturn 0;\n\tlist = alloc_percpu(struct hlist_head);\n\tif (!list)\n\t\tgoto fail;\n\tfor_each_possible_cpu(cpu)\n\t\tINIT_HLIST_HEAD(per_cpu_ptr(list, cpu));\n\ttp_event->perf_events = list;\n\tif (!total_ref_count) {\n\t\tchar __percpu *buf;\n\t\tint i;\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tbuf = (char __percpu *)alloc_percpu(perf_trace_t);\n\t\t\tif (!buf)\n\t\t\t\tgoto fail_buf;\n\t\t\tperf_trace_buf[i] = buf;\n\t\t}\n\t}\n\tret = tp_event->class->reg(tp_event, TRACE_REG_PERF_REGISTER, NULL);\n\tif (ret)\n\t\tgoto fail;\n\ttotal_ref_count++;\n\treturn 0;\nfail_buf:\n\tfor (int j = 0; j < i; j++) {\n\t\tfree_percpu(perf_trace_buf[j]);\n\t\tperf_trace_buf[j] = NULL;\n\t}\nfail:\n\tif (!total_ref_count) {\n\t\tint i;\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tfree_percpu(perf_trace_buf[i]);\n\t\t\tperf_trace_buf[i] = NULL;\n\t\t}\n\t}\n\tif (!--tp_event->perf_refcount) {\n\t\tfree_percpu(tp_event->perf_events);\n\t\ttp_event->perf_events = NULL;\n\t}\n\treturn ret;\n}"
       }
     ]
   },
@@ -568,7 +102,7 @@
     "function_code": "static void perf_trace_event_unreg(struct perf_event *p_event)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\tint i;\n\tif (--tp_event->perf_refcount > 0)\n\t\tgoto out;\n\ttp_event->class->reg(tp_event, TRACE_REG_PERF_UNREGISTER, NULL);\n\t/*\n\t * Ensure our callback won't be called anymore. The buffers\n\t * will be freed after that.\n\t */\n\ttracepoint_synchronize_unregister();\n\tfree_percpu(tp_event->perf_events);\n\ttp_event->perf_events = NULL;\n\tif (!--total_ref_count) {\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tfree_percpu(perf_trace_buf[i]);\n\t\t\tperf_trace_buf[i] = NULL;\n\t\t}\n\t}\nout:\n\tmodule_put(tp_event->mod);\n}",
     "start_line": 98,
     "end_line": 120,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "2fbaf71d2699da3e906fed7a1c887ee08eb3660fc03694a16210b1149d77f704",
     "vulnerabilities": [
       {
@@ -586,8 +120,8 @@
             "lineCode": "tp_event->perf_events = NULL;"
           }
         ],
-        "riskLevel": 7.0,
-        "explanation": "The code frees the memory allocated to 'tp_event->perf_events' using 'free_percpu', but there is no guarantee that this pointer is not accessed elsewhere in the program after being freed. This can lead to a Use After Free vulnerability, which is a serious issue as it can cause undefined behavior, crashes, or even allow an attacker to execute arbitrary code.",
+        "riskLevel": 7.5,
+        "explanation": "The code frees the memory associated with 'tp_event->perf_events' using 'free_percpu', but it does not ensure that no other references to this memory exist. If another part of the program accesses this memory after it has been freed, it could lead to undefined behavior, including potential security vulnerabilities.",
         "fixCode": "static void perf_trace_event_unreg(struct perf_event *p_event)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\tint i;\n\tif (--tp_event->perf_refcount > 0)\n\t\tgoto out;\n\ttp_event->class->reg(tp_event, TRACE_REG_PERF_UNREGISTER, NULL);\n\t/*\n\t * Ensure our callback won't be called anymore. The buffers\n\t * will be freed after that.\n\t */\n\ttracepoint_synchronize_unregister();\n\tfree_percpu(tp_event->perf_events);\n\ttp_event->perf_events = NULL;\n\tif (!--total_ref_count) {\n\t\tfor (i = 0; i < PERF_NR_CONTEXTS; i++) {\n\t\t\tfree_percpu(perf_trace_buf[i]);\n\t\t\tperf_trace_buf[i] = NULL;\n\t\t}\n\t}\nout:\n\tmodule_put(tp_event->mod);\n}"
       }
     ]
@@ -596,7 +130,7 @@
     "function_code": "static int perf_trace_event_open(struct perf_event *p_event)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\treturn tp_event->class->reg(tp_event, TRACE_REG_PERF_OPEN, p_event);\n}",
     "start_line": 121,
     "end_line": 125,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "9bc7722bc29e400240ad5be81aab567faa72a4fd42174c7ee5aaa299f21dbed0",
     "vulnerabilities": [
       {
@@ -610,8 +144,8 @@
             "lineCode": "return tp_event->class->reg(tp_event, TRACE_REG_PERF_OPEN, p_event);"
           }
         ],
-        "riskLevel": 7.0,
-        "explanation": "The code accesses the 'class' member of 'tp_event' without checking if 'tp_event' is NULL. If 'tp_event' is NULL, this will result in a null pointer dereference, leading to undefined behavior or a crash.",
+        "riskLevel": 7.5,
+        "explanation": "The code accesses the 'class' member of 'tp_event' without verifying if 'tp_event' is NULL. If 'tp_event' is NULL, this will result in a null pointer dereference, leading to undefined behavior or a crash.",
         "fixCode": "static int perf_trace_event_open(struct perf_event *p_event)\n{\n    struct ftrace_event_call *tp_event = p_event->tp_event;\n    if (tp_event == NULL || tp_event->class == NULL || tp_event->class->reg == NULL) {\n        return -EINVAL; // Return an error code if tp_event or its members are NULL\n    }\n    return tp_event->class->reg(tp_event, TRACE_REG_PERF_OPEN, p_event);\n}"
       }
     ]
@@ -620,7 +154,7 @@
     "function_code": "static void perf_trace_event_close(struct perf_event *p_event)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\ttp_event->class->reg(tp_event, TRACE_REG_PERF_CLOSE, p_event);\n}",
     "start_line": 126,
     "end_line": 130,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "50aa0d18e3dfac0fc1e5089fecfebefa53ccf10ad5b68ff1e24cac4097601e2b",
     "vulnerabilities": [
       {
@@ -631,12 +165,16 @@
         "vulnerabilityLines": [
           {
             "lineNum": 3,
+            "lineCode": "struct ftrace_event_call *tp_event = p_event->tp_event;"
+          },
+          {
+            "lineNum": 4,
             "lineCode": "tp_event->class->reg(tp_event, TRACE_REG_PERF_CLOSE, p_event);"
           }
         ],
-        "riskLevel": 7.5,
-        "explanation": "The code does not check if 'tp_event' or 'tp_event->class' is NULL before dereferencing them. If either is NULL, this will lead to a null pointer dereference, causing undefined behavior or a crash.",
-        "fixCode": "static void perf_trace_event_close(struct perf_event *p_event)\n{\n    struct ftrace_event_call *tp_event = p_event->tp_event;\n    if (tp_event && tp_event->class && tp_event->class->reg) {\n        tp_event->class->reg(tp_event, TRACE_REG_PERF_CLOSE, p_event);\n    } else {\n        // Handle the error case appropriately, e.g., log an error or return an error code\n    }\n}"
+        "riskLevel": 7.0,
+        "explanation": "The code does not check if 'p_event' or 'tp_event' is NULL before dereferencing them. If 'p_event' or 'tp_event' is NULL, this will lead to undefined behavior and potentially a crash.",
+        "fixCode": "static void perf_trace_event_close(struct perf_event *p_event)\n{\n\tif (p_event == NULL) {\n\t\treturn; // Handle the NULL case appropriately\n\t}\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\tif (tp_event == NULL || tp_event->class == NULL || tp_event->class->reg == NULL) {\n\t\treturn; // Handle the NULL case appropriately\n\t}\n\ttp_event->class->reg(tp_event, TRACE_REG_PERF_CLOSE, p_event);\n}"
       }
     ]
   },
@@ -644,7 +182,7 @@
     "function_code": "static int perf_trace_event_init(struct ftrace_event_call *tp_event,\n\t\t\t\t struct perf_event *p_event)\n{\n\tint ret;\n\tret = perf_trace_event_perm(tp_event, p_event);\n\tif (ret)\n\t\treturn ret;\n\tret = perf_trace_event_reg(tp_event, p_event);\n\tif (ret)\n\t\treturn ret;\n\tret = perf_trace_event_open(p_event);\n\tif (ret) {\n\t\tperf_trace_event_unreg(p_event);\n\t\treturn ret;\n\t}\n\treturn 0;\n}",
     "start_line": 131,
     "end_line": 147,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "432a273919067763bb369e5219d58083c99d137c78c198d7e3f93583f5d0b011",
     "vulnerabilities": [
       {
@@ -658,9 +196,9 @@
             "lineCode": "perf_trace_event_unreg(p_event);"
           }
         ],
-        "riskLevel": 4.0,
-        "explanation": "The function 'perf_trace_event_unreg' is called in the error handling block, but there is no check to ensure it executes successfully. If 'perf_trace_event_unreg' fails, the error might not be properly handled, leading to potential resource leaks or inconsistent states.",
-        "fixCode": "static int perf_trace_event_init(struct ftrace_event_call *tp_event,\n\t\t\t struct perf_event *p_event)\n{\n\tint ret;\n\tret = perf_trace_event_perm(tp_event, p_event);\n\tif (ret)\n\t\treturn ret;\n\tret = perf_trace_event_reg(tp_event, p_event);\n\tif (ret)\n\t\treturn ret;\n\tret = perf_trace_event_open(p_event);\n\tif (ret) {\n\t\tint unreg_ret = perf_trace_event_unreg(p_event);\n\t\tif (unreg_ret) {\n\t\t\t// Handle the error from perf_trace_event_unreg appropriately\n\t\t\treturn unreg_ret;\n\t\t}\n\t\treturn ret;\n\t}\n\treturn 0;\n}"
+        "riskLevel": 5.0,
+        "explanation": "The function 'perf_trace_event_unreg' is called in the error handling path, but there is no check to ensure it executes successfully. If 'perf_trace_event_unreg' fails, the error might not be properly handled, leading to potential resource leaks or inconsistent states.",
+        "fixCode": "static int perf_trace_event_init(struct ftrace_event_call *tp_event,\n\t\t\t\t struct perf_event *p_event)\n{\n\tint ret;\n\tret = perf_trace_event_perm(tp_event, p_event);\n\tif (ret)\n\t\treturn ret;\n\tret = perf_trace_event_reg(tp_event, p_event);\n\tif (ret)\n\t\treturn ret;\n\tret = perf_trace_event_open(p_event);\n\tif (ret) {\n\t\tint unreg_ret = perf_trace_event_unreg(p_event);\n\t\tif (unreg_ret) {\n\t\t\t// Handle the error from perf_trace_event_unreg appropriately\n\t\t\treturn unreg_ret;\n\t\t}\n\t\treturn ret;\n\t}\n\treturn 0;\n}"
       }
     ]
   },
@@ -668,31 +206,27 @@
     "function_code": "int perf_trace_init(struct perf_event *p_event)\n{\n\tstruct ftrace_event_call *tp_event;\n\tint event_id = p_event->attr.config;\n\tint ret = -EINVAL;\n\tmutex_lock(&event_mutex);\n\tlist_for_each_entry(tp_event, &ftrace_events, list) {\n\t\tif (tp_event->event.type == event_id &&\n\t\t    tp_event->class && tp_event->class->reg &&\n\t\t    try_module_get(tp_event->mod)) {\n\t\t\tret = perf_trace_event_init(tp_event, p_event);\n\t\t\tif (ret)\n\t\t\t\tmodule_put(tp_event->mod);\n\t\t\tbreak;\n\t\t}\n\t}\n\tmutex_unlock(&event_mutex);\n\treturn ret;\n}",
     "start_line": 148,
     "end_line": 166,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "6d14540fc6de731c1dd831446ee5bef1655d1a7f2f4ac88db40ede94f177f42c",
     "vulnerabilities": [
       {
         "language": "C",
         "is_vulnerability": true,
-        "vulnerabilityType": "Use After Free",
-        "cwe": "CWE-416",
+        "vulnerabilityType": "Improper Locking",
+        "cwe": "CWE-667",
         "vulnerabilityLines": [
           {
-            "lineNum": 10,
-            "lineCode": "if (tp_event->event.type == event_id &&"
+            "lineNum": 7,
+            "lineCode": "list_for_each_entry(tp_event, &ftrace_events, list) {"
           },
           {
-            "lineNum": 11,
-            "lineCode": "tp_event->class && tp_event->class->reg &&"
-          },
-          {
-            "lineNum": 12,
-            "lineCode": "try_module_get(tp_event->mod)) {"
+            "lineNum": 15,
+            "lineCode": "mutex_unlock(&event_mutex);"
           }
         ],
-        "riskLevel": 7.5,
-        "explanation": "The code uses the 'try_module_get' function to increment the module's reference count, but it does not ensure that the module is not unloaded before accessing its members. This can lead to a use-after-free vulnerability if the module is unloaded concurrently.",
-        "fixCode": "int perf_trace_init(struct perf_event *p_event)\n{\n\tstruct ftrace_event_call *tp_event;\n\tint event_id = p_event->attr.config;\n\tint ret = -EINVAL;\n\tmutex_lock(&event_mutex);\n\tlist_for_each_entry(tp_event, &ftrace_events, list) {\n\t\tif (tp_event->event.type == event_id &&\n\t\t    tp_event->class && tp_event->class->reg) {\n\t\t\tif (try_module_get(tp_event->mod)) {\n\t\t\t\tret = perf_trace_event_init(tp_event, p_event);\n\t\t\t\tif (ret)\n\t\t\t\t\tmodule_put(tp_event->mod);\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\tmutex_unlock(&event_mutex);\n\treturn ret;\n}"
+        "riskLevel": 4.0,
+        "explanation": "The function uses a mutex to protect access to shared resources, but the loop and conditional logic inside the critical section could lead to scenarios where the mutex is not properly released, especially if an error occurs or an exception is raised.",
+        "fixCode": "int perf_trace_init(struct perf_event *p_event)\n{\n\tstruct ftrace_event_call *tp_event;\n\tint event_id = p_event->attr.config;\n\tint ret = -EINVAL;\n\tmutex_lock(&event_mutex);\n\tlist_for_each_entry(tp_event, &ftrace_events, list) {\n\t\tif (tp_event->event.type == event_id &&\n\t\t    tp_event->class && tp_event->class->reg &&\n\t\t    try_module_get(tp_event->mod)) {\n\t\t\tret = perf_trace_event_init(tp_event, p_event);\n\t\t\tif (ret) {\n\t\t\t\tmodule_put(tp_event->mod);\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\tmutex_unlock(&event_mutex);\n\treturn ret;\n}"
       }
     ]
   },
@@ -700,27 +234,18 @@
     "function_code": "void perf_trace_destroy(struct perf_event *p_event)\n{\n\tmutex_lock(&event_mutex);\n\tperf_trace_event_close(p_event);\n\tperf_trace_event_unreg(p_event);\n\tmutex_unlock(&event_mutex);\n}",
     "start_line": 167,
     "end_line": 173,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "e92f26ab8f7eafb4c2cb93ed5226233361ac2c2e9195abdde693ae99587155ca",
     "vulnerabilities": [
       {
         "language": "C",
-        "is_vulnerability": true,
-        "vulnerabilityType": "Use After Free",
-        "cwe": "CWE-416",
-        "vulnerabilityLines": [
-          {
-            "lineNum": 4,
-            "lineCode": "perf_trace_event_close(p_event);"
-          },
-          {
-            "lineNum": 5,
-            "lineCode": "perf_trace_event_unreg(p_event);"
-          }
-        ],
-        "riskLevel": 7.0,
-        "explanation": "The function `perf_trace_destroy` calls `perf_trace_event_close` and `perf_trace_event_unreg` on the same `p_event` object. If `perf_trace_event_close` frees or invalidates `p_event`, then using it in `perf_trace_event_unreg` could lead to undefined behavior, such as a use-after-free vulnerability.",
-        "fixCode": "void perf_trace_destroy(struct perf_event *p_event)\n{\n\tmutex_lock(&event_mutex);\n\tperf_trace_event_unreg(p_event); // Ensure unregistration happens before closing\n\tperf_trace_event_close(p_event); // Close the event after unregistration\n\tmutex_unlock(&event_mutex);\n}"
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It uses proper locking mechanisms to ensure thread safety when accessing shared resources.",
+        "fixCode": "void perf_trace_destroy(struct perf_event *p_event)\n{\n\tmutex_lock(&event_mutex);\n\tperf_trace_event_close(p_event);\n\tperf_trace_event_unreg(p_event);\n\tmutex_unlock(&event_mutex);\n}"
       }
     ]
   },
@@ -728,7 +253,7 @@
     "function_code": "int perf_trace_add(struct perf_event *p_event, int flags)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\tstruct hlist_head __percpu *pcpu_list;\n\tstruct hlist_head *list;\n\tpcpu_list = tp_event->perf_events;\n\tif (WARN_ON_ONCE(!pcpu_list))\n\t\treturn -EINVAL;\n\tif (!(flags & PERF_EF_START))\n\t\tp_event->hw.state = PERF_HES_STOPPED;\n\tlist = this_cpu_ptr(pcpu_list);\n\thlist_add_head_rcu(&p_event->hlist_entry, list);\n\treturn tp_event->class->reg(tp_event, TRACE_REG_PERF_ADD, p_event);\n}",
     "start_line": 174,
     "end_line": 187,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "a500cdeab124c327f88c662372d9bc19d2cec4168f23778be5a1eac736ed7541",
     "vulnerabilities": [
       {
@@ -747,7 +272,7 @@
           }
         ],
         "riskLevel": 7.0,
-        "explanation": "The code uses RCU (Read-Copy-Update) mechanisms for list manipulation, but it does not ensure proper synchronization or locking mechanisms to prevent concurrent access issues. This can lead to race conditions if multiple threads access and modify the same data structure concurrently.",
+        "explanation": "The code uses RCU (Read-Copy-Update) primitives for list manipulation, but it does not ensure proper synchronization or locking mechanisms to prevent concurrent access issues. This can lead to race conditions if multiple threads access and modify the same data concurrently.",
         "fixCode": "int perf_trace_add(struct perf_event *p_event, int flags)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\tstruct hlist_head __percpu *pcpu_list;\n\tstruct hlist_head *list;\n\tpcpu_list = tp_event->perf_events;\n\tif (WARN_ON_ONCE(!pcpu_list))\n\t\treturn -EINVAL;\n\tif (!(flags & PERF_EF_START))\n\t\tp_event->hw.state = PERF_HES_STOPPED;\n\tlist = this_cpu_ptr(pcpu_list);\n\tspin_lock(&list->lock); // Acquire lock before modifying the list\n\thlist_add_head_rcu(&p_event->hlist_entry, list);\n\tspin_unlock(&list->lock); // Release lock after modification\n\treturn tp_event->class->reg(tp_event, TRACE_REG_PERF_ADD, p_event);\n}"
       }
     ]
@@ -756,7 +281,7 @@
     "function_code": "void perf_trace_del(struct perf_event *p_event, int flags)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\thlist_del_rcu(&p_event->hlist_entry);\n\ttp_event->class->reg(tp_event, TRACE_REG_PERF_DEL, p_event);\n}",
     "start_line": 188,
     "end_line": 193,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "41fad636ea07c0377b1269f2204e15070c35914a8bc6e603e3fd7ae9809f6c42",
     "vulnerabilities": [
       {
@@ -771,7 +296,7 @@
           }
         ],
         "riskLevel": 7.0,
-        "explanation": "The function accesses 'tp_event->class->reg' after 'hlist_del_rcu(&p_event->hlist_entry)' is called. If 'hlist_del_rcu' frees or invalidates 'p_event', this could lead to a use-after-free vulnerability.",
+        "explanation": "The function accesses 'tp_event->class->reg' after 'hlist_del_rcu(&p_event->hlist_entry)' is called. If 'hlist_del_rcu' frees or invalidates 'p_event', then accessing 'tp_event' (which is derived from 'p_event') can lead to undefined behavior or a use-after-free vulnerability.",
         "fixCode": "void perf_trace_del(struct perf_event *p_event, int flags)\n{\n\tstruct ftrace_event_call *tp_event = p_event->tp_event;\n\tif (tp_event && tp_event->class && tp_event->class->reg) {\n\t\thlist_del_rcu(&p_event->hlist_entry);\n\t\ttp_event->class->reg(tp_event, TRACE_REG_PERF_DEL, p_event);\n\t}\n}"
       }
     ]
@@ -780,7 +305,7 @@
     "function_code": "__kprobes void *perf_trace_buf_prepare(int size, unsigned short type,\n\t\t\t\t       struct pt_regs *regs, int *rctxp)\n{\n\tstruct trace_entry *entry;\n\tunsigned long flags;\n\tchar *raw_data;\n\tint pc;\n\tBUILD_BUG_ON(PERF_MAX_TRACE_SIZE % sizeof(unsigned long));\n\tif (WARN_ONCE(size > PERF_MAX_TRACE_SIZE,\n\t\t\t\"perf buffer not large enough\"))\n\t\treturn NULL;\n\tpc = preempt_count();\n\t*rctxp = perf_swevent_get_recursion_context();\n\tif (*rctxp < 0)\n\t\treturn NULL;\n\traw_data = this_cpu_ptr(perf_trace_buf[*rctxp]);\n\t/* zero the dead bytes from align to not leak stack to user */\n\tmemset(&raw_data[size - sizeof(u64)], 0, sizeof(u64));\n\tentry = (struct trace_entry *)raw_data;\n\tlocal_save_flags(flags);\n\ttracing_generic_entry_update(entry, flags, pc);\n\tentry->type = type;\n\treturn raw_data;\n}",
     "start_line": 194,
     "end_line": 217,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "512fe0c419494635cb415e1e5c361a752e68d68c72ca7679d4e0524b64113ba4",
     "vulnerabilities": [
       {
@@ -790,17 +315,17 @@
         "cwe": "CWE-20",
         "vulnerabilityLines": [
           {
-            "lineNum": 10,
+            "lineNum": 11,
             "lineCode": "raw_data = this_cpu_ptr(perf_trace_buf[*rctxp]);"
           },
           {
-            "lineNum": 12,
+            "lineNum": 13,
             "lineCode": "memset(&raw_data[size - sizeof(u64)], 0, sizeof(u64));"
           }
         ],
-        "riskLevel": 7.0,
-        "explanation": "The code does not validate the value of 'size' before using it in the 'memset' function. If 'size' is less than 'sizeof(u64)', the calculation 'size - sizeof(u64)' will result in a negative value, which can lead to undefined behavior or memory corruption.",
-        "fixCode": "__kprobes void *perf_trace_buf_prepare(int size, unsigned short type,\n                       struct pt_regs *regs, int *rctxp)\n{\n    struct trace_entry *entry;\n    unsigned long flags;\n    char *raw_data;\n    int pc;\n    BUILD_BUG_ON(PERF_MAX_TRACE_SIZE % sizeof(unsigned long));\n    if (WARN_ONCE(size > PERF_MAX_TRACE_SIZE || size < sizeof(u64),\n            \"perf buffer not large enough or size too small\"))\n        return NULL;\n    pc = preempt_count();\n    *rctxp = perf_swevent_get_recursion_context();\n    if (*rctxp < 0)\n        return NULL;\n    raw_data = this_cpu_ptr(perf_trace_buf[*rctxp]);\n    /* zero the dead bytes from align to not leak stack to user */\n    memset(&raw_data[size - sizeof(u64)], 0, sizeof(u64));\n    entry = (struct trace_entry *)raw_data;\n    local_save_flags(flags);\n    tracing_generic_entry_update(entry, flags, pc);\n    entry->type = type;\n    return raw_data;\n}"
+        "riskLevel": 4.0,
+        "explanation": "The code does not validate the value of 'size' before using it in the 'memset' function. If 'size' is less than 'sizeof(u64)', the calculation 'size - sizeof(u64)' could result in a negative value, leading to undefined behavior or memory corruption.",
+        "fixCode": "__kprobes void *perf_trace_buf_prepare(int size, unsigned short type,\n                   struct pt_regs *regs, int *rctxp)\n{\n    struct trace_entry *entry;\n    unsigned long flags;\n    char *raw_data;\n    int pc;\n    BUILD_BUG_ON(PERF_MAX_TRACE_SIZE % sizeof(unsigned long));\n    if (WARN_ONCE(size > PERF_MAX_TRACE_SIZE || size < sizeof(u64),\n            \"perf buffer not large enough or size too small\"))\n        return NULL;\n    pc = preempt_count();\n    *rctxp = perf_swevent_get_recursion_context();\n    if (*rctxp < 0)\n        return NULL;\n    raw_data = this_cpu_ptr(perf_trace_buf[*rctxp]);\n    /* zero the dead bytes from align to not leak stack to user */\n    memset(&raw_data[size - sizeof(u64)], 0, sizeof(u64));\n    entry = (struct trace_entry *)raw_data;\n    local_save_flags(flags);\n    tracing_generic_entry_update(entry, flags, pc);\n    entry->type = type;\n    return raw_data;\n}"
       }
     ]
   },
@@ -808,7 +333,7 @@
     "function_code": "static void\nperf_ftrace_function_call(unsigned long ip, unsigned long parent_ip,\n\t\t\t  struct ftrace_ops *ops, struct pt_regs *pt_regs)\n{\n\tstruct ftrace_entry *entry;\n\tstruct hlist_head *head;\n\tstruct pt_regs regs;\n\tint rctx;\n\thead = this_cpu_ptr(event_function.perf_events);\n\tif (hlist_empty(head))\n\t\treturn;\n#define ENTRY_SIZE (ALIGN(sizeof(struct ftrace_entry) + sizeof(u32), \\\n\t\t    sizeof(u64)) - sizeof(u32))\n\tBUILD_BUG_ON(ENTRY_SIZE > PERF_MAX_TRACE_SIZE);\n\tperf_fetch_caller_regs(&regs);\n\tentry = perf_trace_buf_prepare(ENTRY_SIZE, TRACE_FN, NULL, &rctx);\n\tif (!entry)\n\t\treturn;\n\tentry->ip = ip;\n\tentry->parent_ip = parent_ip;\n\tperf_trace_buf_submit(entry, ENTRY_SIZE, rctx, 0,\n\t\t\t      1, &regs, head, NULL);\n#undef ENTRY_SIZE\n}",
     "start_line": 220,
     "end_line": 243,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "412ce304deb018c01df53add26c28f9f71382a033679daf095fcf86c8760a207",
     "vulnerabilities": [
       {
@@ -822,9 +347,9 @@
             "lineCode": "entry = perf_trace_buf_prepare(ENTRY_SIZE, TRACE_FN, NULL, &rctx);"
           }
         ],
-        "riskLevel": 7.0,
-        "explanation": "The function `perf_trace_buf_prepare` is called with a size parameter `ENTRY_SIZE` that is calculated based on a macro. If the macro or the size calculation is incorrect or not properly validated, it could lead to buffer overflows or memory corruption. Additionally, the function does not validate the return value of `perf_trace_buf_prepare` beyond checking for NULL, which might not be sufficient to ensure safe operation.",
-        "fixCode": "static void\nperf_ftrace_function_call(unsigned long ip, unsigned long parent_ip,\n\t\t  struct ftrace_ops *ops, struct pt_regs *pt_regs)\n{\n\tstruct ftrace_entry *entry;\n\tstruct hlist_head *head;\n\tstruct pt_regs regs;\n\tint rctx;\n\thead = this_cpu_ptr(event_function.perf_events);\n\tif (hlist_empty(head))\n\t\treturn;\n#define ENTRY_SIZE (ALIGN(sizeof(struct ftrace_entry) + sizeof(u32), \\\n\t\t    sizeof(u64)) - sizeof(u32))\n\tBUILD_BUG_ON(ENTRY_SIZE > PERF_MAX_TRACE_SIZE);\n\tperf_fetch_caller_regs(&regs);\n\tif (ENTRY_SIZE > PERF_MAX_TRACE_SIZE) {\n\t\t/* Log an error or handle the size issue */\n\t\treturn;\n\t}\n\tentry = perf_trace_buf_prepare(ENTRY_SIZE, TRACE_FN, NULL, &rctx);\n\tif (!entry)\n\t\treturn;\n\tentry->ip = ip;\n\tentry->parent_ip = parent_ip;\n\tperf_trace_buf_submit(entry, ENTRY_SIZE, rctx, 0,\n\t\t\t      1, &regs, head, NULL);\n#undef ENTRY_SIZE\n}"
+        "riskLevel": 7.5,
+        "explanation": "The function does not validate the return value of 'perf_trace_buf_prepare' adequately before using it. If 'entry' is NULL, subsequent dereferences of 'entry' could lead to undefined behavior or crashes.",
+        "fixCode": "static void\nperf_ftrace_function_call(unsigned long ip, unsigned long parent_ip,\n\t\t  struct ftrace_ops *ops, struct pt_regs *pt_regs)\n{\n\tstruct ftrace_entry *entry;\n\tstruct hlist_head *head;\n\tstruct pt_regs regs;\n\tint rctx;\n\thead = this_cpu_ptr(event_function.perf_events);\n\tif (hlist_empty(head))\n\t\treturn;\n#define ENTRY_SIZE (ALIGN(sizeof(struct ftrace_entry) + sizeof(u32), \\\n\t\t    sizeof(u64)) - sizeof(u32))\n\tBUILD_BUG_ON(ENTRY_SIZE > PERF_MAX_TRACE_SIZE);\n\tperf_fetch_caller_regs(&regs);\n\tentry = perf_trace_buf_prepare(ENTRY_SIZE, TRACE_FN, NULL, &rctx);\n\tif (!entry)\n\t\treturn;\n\tentry->ip = ip;\n\tentry->parent_ip = parent_ip;\n\tperf_trace_buf_submit(entry, ENTRY_SIZE, rctx, 0,\n\t\t\t      1, &regs, head, NULL);\n#undef ENTRY_SIZE\n}"
       }
     ]
   },
@@ -832,7 +357,7 @@
     "function_code": "static int perf_ftrace_function_register(struct perf_event *event)\n{\n\tstruct ftrace_ops *ops = &event->ftrace_ops;\n\tops->flags |= FTRACE_OPS_FL_CONTROL;\n\tops->func = perf_ftrace_function_call;\n\treturn register_ftrace_function(ops);\n}",
     "start_line": 244,
     "end_line": 250,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "ab81425a9f93fab3cd019d296b77b2d11dec7829d4dd1700871d07a6cfcf4734",
     "vulnerabilities": [
       {
@@ -848,7 +373,7 @@
         ],
         "riskLevel": 4.0,
         "explanation": "The function 'register_ftrace_function' is called with 'ops' as an argument, but there is no validation or sanitization of the 'ops' structure before its use. If 'ops' contains invalid or malicious data, it could lead to undefined behavior or security vulnerabilities.",
-        "fixCode": "static int perf_ftrace_function_register(struct perf_event *event)\n{\n\tstruct ftrace_ops *ops = &event->ftrace_ops;\n\tif (!ops) {\n\t\treturn -EINVAL; // Return an error if ops is NULL\n\t}\n\tops->flags |= FTRACE_OPS_FL_CONTROL;\n\tops->func = perf_ftrace_function_call;\n\treturn register_ftrace_function(ops);\n}"
+        "fixCode": "static int perf_ftrace_function_register(struct perf_event *event)\n{\n\tstruct ftrace_ops *ops = &event->ftrace_ops;\n\tif (!ops) {\n\t\treturn -EINVAL; // Return an error if ops is NULL\n\t}\n\tops->flags |= FTRACE_OPS_FL_CONTROL;\n\tops->func = perf_ftrace_function_call;\n\tif (!validate_ftrace_ops(ops)) { // Hypothetical validation function\n\t\treturn -EINVAL; // Return an error if validation fails\n\t}\n\treturn register_ftrace_function(ops);\n}"
       }
     ]
   },
@@ -856,7 +381,7 @@
     "function_code": "static int perf_ftrace_function_unregister(struct perf_event *event)\n{\n\tstruct ftrace_ops *ops = &event->ftrace_ops;\n\tint ret = unregister_ftrace_function(ops);\n\tftrace_free_filter(ops);\n\treturn ret;\n}",
     "start_line": 251,
     "end_line": 257,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "60cdf86fddba82924723ade6d344e3a47d4333487d1b000d03ce6499f04c4f73",
     "vulnerabilities": [
       {
@@ -866,12 +391,12 @@
         "cwe": "CWE-416",
         "vulnerabilityLines": [
           {
-            "lineNum": 4,
+            "lineNum": 5,
             "lineCode": "ftrace_free_filter(ops);"
           }
         ],
         "riskLevel": 7.0,
-        "explanation": "The function `ftrace_free_filter` is called on the `ops` object, which is a member of the `event` structure. If the `unregister_ftrace_function` function frees or invalidates the `ops` object, then calling `ftrace_free_filter` on it could lead to undefined behavior, such as a use-after-free vulnerability.",
+        "explanation": "The function `ftrace_free_filter` frees the memory associated with `ops`. However, the pointer `ops` is still used afterwards, which can lead to undefined behavior if the memory is accessed.",
         "fixCode": "static int perf_ftrace_function_unregister(struct perf_event *event)\n{\n\tstruct ftrace_ops *ops = &event->ftrace_ops;\n\tint ret = unregister_ftrace_function(ops);\n\tif (ret == 0) {\n\t\tftrace_free_filter(ops);\n\t}\n\treturn ret;\n}"
       }
     ]
@@ -880,7 +405,7 @@
     "function_code": "static void perf_ftrace_function_enable(struct perf_event *event)\n{\n\tftrace_function_local_enable(&event->ftrace_ops);\n}",
     "start_line": 258,
     "end_line": 261,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "adda8122f5915d082b5bf01838e0779833095a859c2ab22a7643a4335cf5ff91",
     "vulnerabilities": [
       {
@@ -890,7 +415,7 @@
         "cwe": "",
         "vulnerabilityLines": [],
         "riskLevel": 0.0,
-        "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It is a simple function that calls another function to enable a feature, and no unsafe operations or insecure patterns are present.",
+        "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It is a simple function that calls another function to enable a feature, and there are no indications of unsafe operations or insecure practices.",
         "fixCode": "static void perf_ftrace_function_enable(struct perf_event *event)\n{\n\tftrace_function_local_enable(&event->ftrace_ops);\n}"
       }
     ]
@@ -899,7 +424,7 @@
     "function_code": "static void perf_ftrace_function_disable(struct perf_event *event)\n{\n\tftrace_function_local_disable(&event->ftrace_ops);\n}",
     "start_line": 262,
     "end_line": 265,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "b195660a2583da515a0576d9db068cb8b97dc63c53e8ddae464cdfbb3ec23f56",
     "vulnerabilities": [
       {
@@ -909,7 +434,7 @@
         "cwe": "",
         "vulnerabilityLines": [],
         "riskLevel": 0.0,
-        "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It is a simple function that calls another function to disable a local ftrace function associated with a perf_event structure. There are no unsafe operations, user input handling, or memory management issues in this snippet.",
+        "explanation": "The provided code snippet defines a static function `perf_ftrace_function_disable` that calls another function `ftrace_function_local_disable` with a member of the `event` structure. There are no apparent vulnerabilities in this code snippet based on the provided context. The function appears to perform its intended operation correctly, and there are no indications of unsafe operations, such as buffer overflows, null pointer dereferences, or improper memory management.",
         "fixCode": "static void perf_ftrace_function_disable(struct perf_event *event)\n{\n\tftrace_function_local_disable(&event->ftrace_ops);\n}"
       }
     ]
@@ -918,7 +443,7 @@
     "function_code": "int perf_ftrace_event_register(struct ftrace_event_call *call,\n\t\t\t       enum trace_reg type, void *data)\n{\n\tswitch (type) {\n\tcase TRACE_REG_REGISTER:\n\tcase TRACE_REG_UNREGISTER:\n\t\tbreak;\n\tcase TRACE_REG_PERF_REGISTER:\n\tcase TRACE_REG_PERF_UNREGISTER:\n\t\treturn 0;\n\tcase TRACE_REG_PERF_OPEN:\n\t\treturn perf_ftrace_function_register(data);\n\tcase TRACE_REG_PERF_CLOSE:\n\t\treturn perf_ftrace_function_unregister(data);\n\tcase TRACE_REG_PERF_ADD:\n\t\tperf_ftrace_function_enable(data);\n\t\treturn 0;\n\tcase TRACE_REG_PERF_DEL:\n\t\tperf_ftrace_function_disable(data);\n\t\treturn 0;\n\t}\n\treturn -EINVAL;\n}",
     "start_line": 266,
     "end_line": 288,
-    "file_path": "./data/test.c",
+    "file_path": "./data\\test.c",
     "hash": "5e793efa2311fbd3329633da5d42adb3dde81f12046de6304f02f9ccd7ba6230",
     "vulnerabilities": [
       {
@@ -1007,10 +532,481 @@
     ]
   },
   {
+    "function_code": "type Rectangle struct {\n\tHeight float64\n\tWidth  float64\n}",
+    "start_line": 9,
+    "end_line": 12,
+    "file_path": "./data\\test.go",
+    "hash": "ef4084e3c67ea4c74b39165266713887c15446dcc4bbc6430ce1b7d6084ed8d4",
+    "vulnerabilities": [
+      {
+        "language": "Go",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet defines a simple struct in Go and does not contain any logic or functionality that could lead to a vulnerability. It is safe as is.",
+        "fixCode": "type Rectangle struct {\n\tHeight float64\n\tWidth  float64\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "func (r Rectangle) Area() float64 {\n\treturn r.Height * r.Width\n}",
+    "start_line": 15,
+    "end_line": 17,
+    "file_path": "./data\\test.go",
+    "hash": "88f7a392872541a799748536ef0bf20997ab2d50935915da6acebb95609964ff",
+    "vulnerabilities": [
+      {
+        "language": "Go",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Go code defines a method `Area` for a `Rectangle` struct that calculates the area by multiplying its `Height` and `Width` fields. This operation is safe and does not introduce any security vulnerabilities. There are no Semgrep findings provided, and no additional issues were identified.",
+        "fixCode": "func (r Rectangle) Area() float64 {\n\treturn r.Height * r.Width\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "func (r Rectangle) Perimeter() float64 {\n\treturn 2 * (r.Height + r.Width)\n}",
+    "start_line": 20,
+    "end_line": 22,
+    "file_path": "./data\\test.go",
+    "hash": "8700f0261ad731b3d00d3aaeb1d310381873864f2df3b81328567b5dcfa7da03",
+    "vulnerabilities": [
+      {
+        "language": "Go",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Go code defines a method `Perimeter` for a `Rectangle` struct, which calculates the perimeter of the rectangle. This code does not contain any vulnerabilities. It performs a simple arithmetic operation on the `Height` and `Width` fields of the `Rectangle` struct, and there are no indications of unsafe operations, improper input handling, or other security concerns.",
+        "fixCode": "func (r Rectangle) Perimeter() float64 {\n\treturn 2 * (r.Height + r.Width)\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "func SayHello(name string) {\n\tfmt.Printf(\"Hello, %s!\\n\", name)\n}",
+    "start_line": 25,
+    "end_line": 27,
+    "file_path": "./data\\test.go",
+    "hash": "f367ef67fa60ac808c6e7ace06b33e7a758e235c3e669d2b76bea6c48f207a49",
+    "vulnerabilities": [
+      {
+        "language": "Go",
+        "is_vulnerability": true,
+        "vulnerabilityType": "Uncontrolled Format String",
+        "cwe": "CWE-134",
+        "vulnerabilityLines": [
+          {
+            "lineNum": 2,
+            "lineCode": "fmt.Printf(\"Hello, %s!\\n\", name)"
+          }
+        ],
+        "riskLevel": 7.5,
+        "explanation": "The code uses fmt.Printf with a user-controlled input (name) as part of the format string. If the input is not properly sanitized, it could lead to a format string vulnerability, where an attacker could inject format specifiers to manipulate the output or cause a crash.",
+        "fixCode": "func SayHello(name string) {\n\tfmt.Printf(\"Hello, %s!\\n\", name)\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "func Multiply(a, b int) int {\n\treturn a * b\n}",
+    "start_line": 30,
+    "end_line": 32,
+    "file_path": "./data\\test.go",
+    "hash": "e98a24f82597db5e16dc4e06c2a65bd22472f8a1738994079394915801db727a",
+    "vulnerabilities": [
+      {
+        "language": "Go",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Go code defines a simple function `Multiply` that takes two integers as input and returns their product. There are no apparent vulnerabilities in this code snippet. It does not perform any operations that could lead to security issues, such as handling user input, performing file or network operations, or interacting with sensitive data.",
+        "fixCode": "func Multiply(a, b int) int {\n\treturn a * b\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "func CircleArea(radius float64) float64 {\n\treturn PI * math.Pow(radius, 2)\n}",
+    "start_line": 38,
+    "end_line": 40,
+    "file_path": "./data\\test.go",
+    "hash": "01693f96d02e8346cb20b25d5168c52c3dff9088d69b2fb4f2abbf3316dab846",
+    "vulnerabilities": [
+      {
+        "language": "Go",
+        "is_vulnerability": true,
+        "vulnerabilityType": "Use of Undefined Constant",
+        "cwe": "CWE-682",
+        "vulnerabilityLines": [
+          {
+            "lineNum": 2,
+            "lineCode": "return PI * math.Pow(radius, 2)"
+          }
+        ],
+        "riskLevel": 4.0,
+        "explanation": "The code uses a constant 'PI' which is not defined within the function or imported from any package. This will cause a runtime error or undefined behavior.",
+        "fixCode": "package main\n\nimport (\n\t\"math\"\n)\n\nconst PI = 3.141592653589793\n\nfunc CircleArea(radius float64) float64 {\n\treturn PI * math.Pow(radius, 2)\n}\n\nfunc main() {\n\t// Example usage\n\tarea := CircleArea(5.0)\n\tprintln(\"Area of the circle:\", area)\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "func main() {\n\trect := Rectangle{Height: 10, Width: 5}\n\tfmt.Println(\"Area:\", rect.Area())\n\tfmt.Println(\"Perimeter:\", rect.Perimeter())\n\n\tSayHello(\"Alice\")\n\tfmt.Println(\"Product:\", Multiply(3, 4))\n\tfmt.Println(\"Circle Area:\", CircleArea(7))\n}",
+    "start_line": 43,
+    "end_line": 51,
+    "file_path": "./data\\test.go",
+    "hash": "a2dc5212c9dd68443f66a85d7065860081ea633578447315510bca396c74912f",
+    "vulnerabilities": [
+      {
+        "language": "Go",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Go code snippet does not contain any apparent vulnerabilities. It defines a main function that demonstrates the usage of some functions and methods, but the actual implementations of these functions and methods are not provided in the snippet. Without the implementations, we cannot assess their security. However, the code snippet itself does not exhibit any insecure practices.",
+        "fixCode": "func main() {\n\trect := Rectangle{Height: 10, Width: 5}\n\tfmt.Println(\"Area:\", rect.Area())\n\tfmt.Println(\"Perimeter:\", rect.Perimeter())\n\n\tSayHello(\"Alice\")\n\tfmt.Println(\"Product:\", Multiply(3, 4))\n\tfmt.Println(\"Circle Area:\", CircleArea(7))\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "class Rectangle {\n  constructor(height, width) {\n    this.height = height;\n    this.width = width;\n  }\n\n  area() {\n    return this.height * this.width;\n  }\n}",
+    "start_line": 7,
+    "end_line": 16,
+    "file_path": "./data\\test.js",
+    "hash": "f6e7f6f584ecb3d238ee2518512ce71f896279c0eb094872d83d8d0578c6eb33",
+    "vulnerabilities": [
+      {
+        "language": "javascript",
+        "is_vulnerability": false,
+        "vulnerabilityType": "None",
+        "cwe": "None",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code defines a simple Rectangle class with a constructor and an area method. There are no apparent vulnerabilities in this code.",
+        "fixCode": "class Rectangle {\n  constructor(height, width) {\n    this.height = height;\n    this.width = width;\n  }\n\n  area() {\n    return this.height * this.width;\n  }\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "function",
+    "start_line": 19,
+    "end_line": 19,
+    "file_path": "./data\\test.js",
+    "hash": "78f9ac018e554365069108352dacabb7fbd15246edf19400677e3b54fe24e126",
+    "vulnerabilities": [
+      {
+        "language": "javascript",
+        "is_vulnerability": false,
+        "vulnerabilityType": "None",
+        "cwe": "N/A",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet is incomplete and does not contain enough information to analyze for vulnerabilities.",
+        "fixCode": "function // Please provide the complete function code for analysis."
+      }
+    ]
+  },
+  {
+    "function_code": "const multiply = (a, b) => a * b;",
+    "start_line": 24,
+    "end_line": 24,
+    "file_path": "./data\\test.js",
+    "hash": "2128148b1bcae3f69677a222e3d5aa9c36eb4dd298e7cd7ba4b640f5744615bf",
+    "vulnerabilities": [
+      {
+        "language": "javascript",
+        "is_vulnerability": false,
+        "vulnerabilityType": "None",
+        "cwe": "None",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code defines a simple JavaScript function that multiplies two numbers. There are no apparent vulnerabilities in this code.",
+        "fixCode": "const multiply = (a, b) => a * b;"
+      }
+    ]
+  },
+  {
+    "function_code": "const PI = 3.14;",
+    "start_line": 27,
+    "end_line": 27,
+    "file_path": "./data\\test.js",
+    "hash": "63081846250477a084b8114798abc5645ede976142188acc2a5fdbd58a2c26b1",
+    "vulnerabilities": [
+      {
+        "language": "javascript",
+        "is_vulnerability": false,
+        "vulnerabilityType": "None",
+        "cwe": "None",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet defines a constant variable 'PI' with a value of 3.14. This code does not contain any vulnerabilities or security issues.",
+        "fixCode": "const PI = 3.14;"
+      }
+    ]
+  },
+  {
+    "function_code": "def foo(x, y=10):\n    '''Adds two numbers with default second parameter.'''\n    return x + y",
+    "start_line": 11,
+    "end_line": 13,
+    "file_path": "./data\\test.py",
+    "hash": "742f1e8b04a432a0e289aed7bf75db9240210c88f16dfd34bbe2e8fa9e5dd041",
+    "vulnerabilities": [
+      {
+        "language": "python",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Python code defines a simple function `foo` that adds two numbers, with the second parameter having a default value of 10. There are no apparent vulnerabilities in this code. It does not handle user input directly, nor does it perform any operations that could lead to security issues such as injection attacks, buffer overflows, or improper resource handling.",
+        "fixCode": "def foo(x, y=10):\n    '''Adds two numbers with default second parameter.'''\n    return x + y"
+      }
+    ]
+  },
+  {
+    "function_code": "def outer(a):\n    def inner(b):\n        return b * 2\n    sq = lambda z: z ** 2\n    return inner(a) + sq(a)",
+    "start_line": 16,
+    "end_line": 20,
+    "file_path": "./data\\test.py",
+    "hash": "7ba85499e16db2d44ef72ff9205967e12f1e6bd74323e11d57ff7040a1aeff28",
+    "vulnerabilities": [
+      {
+        "language": "python",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code defines a Python function `outer` that contains a nested function `inner` and a lambda function `sq`. The code does not perform any operations that are inherently insecure or vulnerable to common security issues. It does not handle external input or perform operations that could lead to vulnerabilities such as injection attacks, insecure deserialization, or improper resource handling.",
+        "fixCode": "def outer(a):\n    def inner(b):\n        return b * 2\n    sq = lambda z: z ** 2\n    return inner(a) + sq(a)"
+      }
+    ]
+  },
+  {
+    "function_code": "async def fetch_data(url: str) -> dict:\n    import aiohttp\n    async with aiohttp.ClientSession() as session:\n        async with session.get(url) as resp:\n            return await resp.json()",
+    "start_line": 23,
+    "end_line": 27,
+    "file_path": "./data\\test.py",
+    "hash": "478caa9b2ab919cba78a360aee840804730927e9d2cba2bc9b58cf605ac2e4c8",
+    "vulnerabilities": [
+      {
+        "language": "python",
+        "is_vulnerability": true,
+        "vulnerabilityType": "Improper Certificate Validation",
+        "cwe": "CWE-295",
+        "vulnerabilityLines": [
+          {
+            "lineNum": 4,
+            "lineCode": "async with session.get(url) as resp:"
+          }
+        ],
+        "riskLevel": 4.0,
+        "explanation": "The code uses aiohttp to make an HTTP request, but it does not specify whether SSL certificate validation is enforced. This could lead to potential man-in-the-middle attacks if the server's certificate is not validated.",
+        "fixCode": "async def fetch_data(url: str) -> dict:\n    import aiohttp\n    import ssl\n    ssl_context = ssl.create_default_context()\n    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:\n        async with session.get(url) as resp:\n            return await resp.json()"
+      }
+    ]
+  },
+  {
+    "function_code": "def log_calls(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        print(f\"Calling {func.__name__}\")\n        return func(*args, **kwargs)\n    return wrapper",
+    "start_line": 32,
+    "end_line": 37,
+    "file_path": "./data\\test.py",
+    "hash": "9e8ad41688c53ee6d1f294d9b3d7e90ff47a55d092aa63aeddcaf486c97aac21",
+    "vulnerabilities": [
+      {
+        "language": "python",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet defines a Python decorator function `log_calls` that wraps another function to log its calls. There are no apparent vulnerabilities in this code. It does not handle sensitive data or perform operations that could lead to security issues.",
+        "fixCode": "def log_calls(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        print(f\"Calling {func.__name__}\")\n        return func(*args, **kwargs)\n    return wrapper"
+      }
+    ]
+  },
+  {
+    "function_code": "class Container:\n    items: list\n\n    @staticmethod\n    def empty():\n        return Container([])\n\n    @classmethod\n    def singleton(cls, item):\n        return cls([item])\n\n    @log_calls\n    def add(self, item):\n        self.items.append(item)\n        return self.items",
+    "start_line": 40,
+    "end_line": 54,
+    "file_path": "./data\\test.py",
+    "hash": "32a9d3c8ea84562b2d5312a9ee5c675484c85989af9d88672e76fe66db86a4bb",
+    "vulnerabilities": [
+      {
+        "language": "python",
+        "is_vulnerability": true,
+        "vulnerabilityType": "Improper Initialization",
+        "cwe": "CWE-665",
+        "vulnerabilityLines": [
+          {
+            "lineNum": 2,
+            "lineCode": "items: list"
+          }
+        ],
+        "riskLevel": 4.0,
+        "explanation": "The 'items' attribute of the 'Container' class is declared but not initialized properly. This can lead to unexpected behavior when the attribute is accessed before being explicitly set.",
+        "fixCode": "class Container:\n    def __init__(self):\n        self.items = []\n\n    @staticmethod\n    def empty():\n        return Container()\n\n    @classmethod\n    def singleton(cls, item):\n        container = cls()\n        container.items.append(item)\n        return container\n\n    @log_calls\n    def add(self, item):\n        self.items.append(item)\n        return self.items"
+      }
+    ]
+  },
+  {
+    "function_code": "def countdown(n: int):\n    while n > 0:\n        yield n\n        n -= 1",
+    "start_line": 57,
+    "end_line": 60,
+    "file_path": "./data\\test.py",
+    "hash": "5dab7c1d892de590b8938c64f0729a46fad23c46de73f9d25b8490ec15bb4ae3",
+    "vulnerabilities": [
+      {
+        "language": "Python",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code defines a simple generator function `countdown` that yields numbers from `n` down to 1. There are no apparent vulnerabilities or security issues in this code. It does not handle user input directly, nor does it perform any operations that could lead to common security issues such as injection, buffer overflows, or improper resource handling.",
+        "fixCode": "def countdown(n: int):\n    while n > 0:\n        yield n\n        n -= 1"
+      }
+    ]
+  },
+  {
+    "function_code": "def process_data(data: list[dict[str, int]], *, flag: bool = False) -> tuple[int, int]:\n    \"\"\"Processes a list of dicts, returns min and max of 'value' keys.\"\"\"\n    values = [d['value'] for d in data if 'value' in d]\n    if flag:\n        values = [v for v in values if v > 0]\n    return min(values), max(values)",
+    "start_line": 63,
+    "end_line": 68,
+    "file_path": "./data\\test.py",
+    "hash": "b8055093b8720431eb7b28450c731917c8e441f7c115ef74c3222ccc5d7d7a41",
+    "vulnerabilities": [
+      {
+        "language": "python",
+        "is_vulnerability": true,
+        "vulnerabilityType": "Improper Input Validation",
+        "cwe": "CWE-20",
+        "vulnerabilityLines": [
+          {
+            "lineNum": 3,
+            "lineCode": "values = [d['value'] for d in data if 'value' in d]"
+          },
+          {
+            "lineNum": 6,
+            "lineCode": "return min(values), max(values)"
+          }
+        ],
+        "riskLevel": 4.0,
+        "explanation": "The code does not validate the input data properly. If the input list 'data' is empty or if none of the dictionaries contain the 'value' key, the 'values' list will be empty. Calling 'min' or 'max' on an empty list will raise a ValueError, which can cause the program to crash.",
+        "fixCode": "def process_data(data: list[dict[str, int]], *, flag: bool = False) -> tuple[int, int]:\n    \"\"\"Processes a list of dicts, returns min and max of 'value' keys.\"\"\"\n    values = [d['value'] for d in data if 'value' in d]\n    if flag:\n        values = [v for v in values if v > 0]\n    if not values:\n        raise ValueError(\"No valid 'value' entries found in the input data.\")\n    return min(values), max(values)"
+      }
+    ]
+  },
+  {
+    "function_code": "use std::fs::{File, OpenOptions};",
+    "start_line": 1,
+    "end_line": 1,
+    "file_path": "./data\\test.rs",
+    "hash": "c86af26697971c75e620bbab34a54c71ece1647302ef5d6c697bbbf9c6176603",
+    "vulnerabilities": [
+      {
+        "language": "rust",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Rust code snippet does not contain any apparent vulnerabilities. It uses standard library functions for file handling, and there are no indications of unsafe operations or insecure practices.",
+        "fixCode": "use std::fs::{File, OpenOptions};"
+      }
+    ]
+  },
+  {
+    "function_code": "use std::io::{self, BufRead, BufReader, Write};",
+    "start_line": 2,
+    "end_line": 2,
+    "file_path": "./data\\test.rs",
+    "hash": "037a6f855f5a52611361e89b0f627fda27c4b6d76e90d4721ca34015818ea2e4",
+    "vulnerabilities": [
+      {
+        "language": "rust",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Rust code snippet does not contain any apparent vulnerabilities based on the analysis. It uses standard library functions for input/output operations, and there are no unsafe operations or improper handling of user input.",
+        "fixCode": "use std::io::{self, BufRead, BufReader, Write};"
+      }
+    ]
+  },
+  {
+    "function_code": "fn main() -> io::Result<()> {\n    let file_path = \"example.txt\";\n\n    // Create and write to the file\n    let mut file = File::create(file_path)?;\n    writeln!(file, \"Line 1: Hello, Rust!\")?;\n    writeln!(file, \"Line 2: File I/O example.\")?;\n    writeln!(file, \"Line 3: Testing CodeChunker.\")?;\n\n    // Read the file line by line\n    let file = File::open(file_path)?;\n    let reader = BufReader::new(file);\n\n    println!(\"Reading contents of '{}':\", file_path);\n    for line in reader.lines() {\n        println!(\"{}\", line?);\n    }\n\n    // Append a new line to the file\n    let mut file = OpenOptions::new().append(true).open(file_path)?;\n    writeln!(file, \"Line 4: Appending a new line.\")?;\n\n    Ok(())\n}",
+    "start_line": 4,
+    "end_line": 27,
+    "file_path": "./data\\test.rs",
+    "hash": "5e71ecfec8eb6f71256f90bedc35509730dde88d98cab05890f5a0f0264c4d08",
+    "vulnerabilities": [
+      {
+        "language": "rust",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided Rust code snippet demonstrates basic file operations such as creating, writing, reading, and appending to a file. Upon analysis, no vulnerabilities or security issues were identified in the code. The code properly handles file operations using the Rust standard library, and errors are propagated using the `?` operator, which is a good practice in Rust for error handling.",
+        "fixCode": "fn main() -> io::Result<()> {\n    let file_path = \"example.txt\";\n\n    // Create and write to the file\n    let mut file = File::create(file_path)?;\n    writeln!(file, \"Line 1: Hello, Rust!\")?;\n    writeln!(file, \"Line 2: File I/O example.\")?;\n    writeln!(file, \"Line 3: Testing CodeChunker.\")?;\n\n    // Read the file line by line\n    let file = File::open(file_path)?;\n    let reader = BufReader::new(file);\n\n    println!(\"Reading contents of '{}':\", file_path);\n    for line in reader.lines() {\n        println!(\"{}\", line?);\n    }\n\n    // Append a new line to the file\n    let mut file = OpenOptions::new().append(true).open(file_path)?;\n    writeln!(file, \"Line 4: Appending a new line.\")?;\n\n    Ok(())\n}"
+      }
+    ]
+  },
+  {
+    "function_code": "struct Data {       // Struct chunk\n    int id;\n}",
+    "start_line": 2,
+    "end_line": 4,
+    "file_path": "./data\\test2.c",
+    "hash": "e1faadc88cb2826aca387726f1a955ad186e891808ec0ebe75ef66c866bff170",
+    "vulnerabilities": [
+      {
+        "language": "C",
+        "is_vulnerability": false,
+        "vulnerabilityType": "None",
+        "cwe": "N/A",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet defines a simple struct in C with a single integer member. There are no operations or logic in the code that could lead to vulnerabilities.",
+        "fixCode": "struct Data {\n    int id;\n};"
+      }
+    ]
+  },
+  {
+    "function_code": "void log_data(struct Data d) {  // Function chunk\n    printf(\"%d\", d.id);\n}",
+    "start_line": 6,
+    "end_line": 8,
+    "file_path": "./data\\test2.c",
+    "hash": "5c12969c44e8b1069fedc4e92ddfe4f1e376276f74599adbf972e32e28efd133",
+    "vulnerabilities": [
+      {
+        "language": "C",
+        "is_vulnerability": true,
+        "vulnerabilityType": "Format String Vulnerability",
+        "cwe": "CWE-134",
+        "vulnerabilityLines": [
+          {
+            "lineNum": 2,
+            "lineCode": "printf(\"%d\", d.id);"
+          }
+        ],
+        "riskLevel": 7.0,
+        "explanation": "The function uses printf to log the id field of the struct Data. However, if the struct Data is not properly validated or if the id field is user-controlled, this could lead to a format string vulnerability, especially if the format specifier is not properly defined or if the input is manipulated.",
+        "fixCode": "void log_data(struct Data d) {\n    printf(\"%d\", d.id);\n}"
+      }
+    ]
+  },
+  {
     "function_code": "class NetworkService {\n  constructor(url) {\n    this.url = url;\n  }\n\n  async fetchData() {\n    return await fetch(this.url);\n  }\n}",
     "start_line": 3,
     "end_line": 11,
-    "file_path": "./data/test2.js",
+    "file_path": "./data\\test2.js",
     "hash": "c412b85242b6714a116787014427f41c08fd26e798ff04384f206c29490b1fa0",
     "vulnerabilities": [
       {
@@ -1029,8 +1025,8 @@
           }
         ],
         "riskLevel": 4.0,
-        "explanation": "The code does not validate or sanitize the 'url' parameter before using it in the 'fetch' function. This could lead to potential security risks such as Server-Side Request Forgery (SSRF) if an attacker controls the 'url' parameter.",
-        "fixCode": "class NetworkService {\n  constructor(url) {\n    if (!this.isValidUrl(url)) {\n      throw new Error('Invalid URL');\n    }\n    this.url = url;\n  }\n\n  isValidUrl(url) {\n    try {\n      new URL(url);\n      return true;\n    } catch (e) {\n      return false;\n    }\n  }\n\n  async fetchData() {\n    return await fetch(this.url);\n  }\n}"
+        "explanation": "The code does not validate or sanitize the 'url' parameter before using it in the 'fetch' function. This could lead to potential security issues such as Server-Side Request Forgery (SSRF) if an attacker controls the 'url' parameter.",
+        "fixCode": "class NetworkService {\n  constructor(url) {\n    if (!this.isValidUrl(url)) {\n      throw new Error(\"Invalid URL\");\n    }\n    this.url = url;\n  }\n\n  isValidUrl(url) {\n    try {\n      new URL(url);\n      return true;\n    } catch (e) {\n      return false;\n    }\n  }\n\n  async fetchData() {\n    return await fetch(this.url);\n  }\n}"
       }
     ]
   },
@@ -1038,8 +1034,27 @@
     "function_code": "function",
     "start_line": 13,
     "end_line": 13,
-    "file_path": "./data/test2.js",
+    "file_path": "./data\\test2.js",
     "hash": "78f9ac018e554365069108352dacabb7fbd15246edf19400677e3b54fe24e126",
+    "vulnerabilities": [
+      {
+        "language": "javascript",
+        "is_vulnerability": false,
+        "vulnerabilityType": "",
+        "cwe": "",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet is incomplete and does not contain enough information to analyze for vulnerabilities. It appears to be a partial function definition without any implementation or context.",
+        "fixCode": "// Please provide a complete code snippet for analysis."
+      }
+    ]
+  },
+  {
+    "function_code": "const config = {\n  mode: \"production\",\n  retry: true\n};",
+    "start_line": 17,
+    "end_line": 20,
+    "file_path": "./data\\test2.js",
+    "hash": "d54c05c37144a60fc5e763065eadead5c8e125af0d187db834fbdb1f786cf707",
     "vulnerabilities": [
       {
         "language": "javascript",
@@ -1048,26 +1063,7 @@
         "cwe": "None",
         "vulnerabilityLines": [],
         "riskLevel": 0.0,
-        "explanation": "The provided code snippet is incomplete and does not contain enough information to analyze for vulnerabilities.",
-        "fixCode": "function // Please provide the complete function code for analysis."
-      }
-    ]
-  },
-  {
-    "function_code": "const config = {\n  mode: \"production\",\n  retry: true\n};",
-    "start_line": 17,
-    "end_line": 20,
-    "file_path": "./data/test2.js",
-    "hash": "d54c05c37144a60fc5e763065eadead5c8e125af0d187db834fbdb1f786cf707",
-    "vulnerabilities": [
-      {
-        "language": "javascript",
-        "is_vulnerability": false,
-        "vulnerabilityType": "",
-        "cwe": "",
-        "vulnerabilityLines": [],
-        "riskLevel": 0.0,
-        "explanation": "The provided code snippet does not contain any apparent vulnerabilities. It defines a configuration object with two properties, 'mode' and 'retry', which are not inherently insecure.",
+        "explanation": "The provided code snippet does not contain any security vulnerabilities. It is a simple configuration object definition in JavaScript, and there are no operations or logic that could lead to security issues.",
         "fixCode": "const config = {\n  mode: \"production\",\n  retry: true\n};"
       }
     ]
@@ -1076,66 +1072,61 @@
     "function_code": "const fetchStatus = async () => {\n  try {\n    let res = await fetch(\"/status\");\n    return res.ok;\n  } catch {\n    return false;\n  }\n};",
     "start_line": 22,
     "end_line": 29,
-    "file_path": "./data/test2.js",
+    "file_path": "./data\\test2.js",
     "hash": "c1de49f18adf5475180534852939a1aa98d945ad83de19163d2ebde42a1eafab",
     "vulnerabilities": [
       {
         "language": "javascript",
         "is_vulnerability": true,
         "vulnerabilityType": "Improper Error Handling",
-        "cwe": "CWE-209",
+        "cwe": "CWE-703",
         "vulnerabilityLines": [
           {
             "lineNum": 3,
             "lineCode": "let res = await fetch(\"/status\");"
           }
         ],
-        "riskLevel": 4.0,
-        "explanation": "The code does not handle potential errors or unexpected responses from the fetch call properly. If the server returns an unexpected response or an error occurs, the function might not behave as intended.",
-        "fixCode": "const fetchStatus = async () => {\n  try {\n    let res = await fetch(\"/status\");\n    if (!res.ok) {\n      console.error(\"Fetch failed with status: \", res.status);\n      return false;\n    }\n    return true;\n  } catch (error) {\n    console.error(\"An error occurred while fetching status: \", error);\n    return false;\n  }\n};"
+        "riskLevel": 1.0,
+        "explanation": "The code does not handle potential errors from the fetch call properly. If the fetch call fails due to network issues or other reasons, the catch block will return false, but no specific error information is logged or handled.",
+        "fixCode": "const fetchStatus = async () => {\n  try {\n    let res = await fetch(\"/status\");\n    if (!res.ok) {\n      console.error(\"Fetch failed with status: \", res.status);\n      return false;\n    }\n    return true;\n  } catch (error) {\n    console.error(\"An error occurred during fetch: \", error);\n    return false;\n  }\n};"
       }
     ]
   },
   {
-    "function_code": "struct Data {       // Struct chunk\n    int id;\n}",
-    "start_line": 2,
-    "end_line": 4,
-    "file_path": "./data/test2.c",
-    "hash": "e1faadc88cb2826aca387726f1a955ad186e891808ec0ebe75ef66c866bff170",
+    "function_code": "template<typename T>  // Template chunk\nclass Container {     // Class chunk\npublic:\n    void add(T item) {\n        // Method chunk\n    }\n};",
+    "start_line": 1,
+    "end_line": 7,
+    "file_path": "./data\\test3.cpp",
+    "hash": "f06e997e08d0fa5b9e8227478751447443f3d77451e31c8b9a62c9b712e9d9c3",
     "vulnerabilities": [
       {
-        "language": "C",
+        "language": "cpp",
         "is_vulnerability": false,
         "vulnerabilityType": "",
         "cwe": "",
         "vulnerabilityLines": [],
         "riskLevel": 0.0,
-        "explanation": "The provided code snippet defines a simple struct in C with a single integer member. There are no operations or logic in the code that could lead to vulnerabilities. It is a safe and valid definition.",
-        "fixCode": "struct Data {\n    int id;\n};"
+        "explanation": "The provided C++ code defines a template class `Container` with a method `add` that takes a parameter of the template type `T`. There are no apparent vulnerabilities in this code snippet as it does not perform any operations that could lead to security issues. The code is a basic template definition and does not include any logic that could be exploited.",
+        "fixCode": "template<typename T>  // Template chunk\nclass Container {     // Class chunk\npublic:\n    void add(T item) {\n        // Method chunk\n    }\n};"
       }
     ]
   },
   {
-    "function_code": "void log_data(struct Data d) {  // Function chunk\n    printf(\"%d\", d.id);\n}",
-    "start_line": 6,
-    "end_line": 8,
-    "file_path": "./data/test2.c",
-    "hash": "5c12969c44e8b1069fedc4e92ddfe4f1e376276f74599adbf972e32e28efd133",
+    "function_code": "namespace utils {     // Namespace chunk\n    void helper() {}\n}",
+    "start_line": 9,
+    "end_line": 11,
+    "file_path": "./data\\test3.cpp",
+    "hash": "773fb3b1565067b9a452277118c9c3b134375baa1480e96ac9a3d1a45e78185d",
     "vulnerabilities": [
       {
-        "language": "C",
-        "is_vulnerability": true,
-        "vulnerabilityType": "Format String Vulnerability",
-        "cwe": "CWE-134",
-        "vulnerabilityLines": [
-          {
-            "lineNum": 2,
-            "lineCode": "printf(\"%d\", d.id);"
-          }
-        ],
-        "riskLevel": 7.0,
-        "explanation": "The function uses printf to output a value from the struct Data. If the input to printf is not properly sanitized or controlled, it could lead to a format string vulnerability, especially if the format string is influenced by user input.",
-        "fixCode": "void log_data(struct Data d) {\n    printf(\"%d\", d.id);\n}"
+        "language": "cpp",
+        "is_vulnerability": false,
+        "vulnerabilityType": "None",
+        "cwe": "N/A",
+        "vulnerabilityLines": [],
+        "riskLevel": 0.0,
+        "explanation": "The provided code snippet defines a namespace 'utils' with a single function 'helper' that does nothing. There are no operations or logic in the code that could lead to vulnerabilities.",
+        "fixCode": "namespace utils {\n    void helper() {}\n}"
       }
     ]
   }
